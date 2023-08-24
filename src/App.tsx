@@ -1,3 +1,4 @@
+import HeaderHome from "./components/HeaderHome"
 import { GlobalCss } from "./styles"
 
 
@@ -5,7 +6,10 @@ function App() {
   return (
     <>
       <GlobalCss />
-      <div>Olá Mundo!</div>
+      <div>
+        <HeaderHome />
+      </div>
+      
     </>
 
   )
