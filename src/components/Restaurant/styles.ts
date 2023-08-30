@@ -37,13 +37,13 @@ export const TitleRating = styled.div`
   justify-content: space-between;
   align-items: center;
 `
-export const ContainerRating = styled.div`
+export const ContainerAvaliacao = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
   margin-right: 8px;
 `
-export const Rating = styled.span`
+export const Avaliacao = styled.span`
   font-size: 18px;
   font-weight: bold;
 `
