@@ -1,4 +1,4 @@
-import { styled } from "styled-components";
+import styled from "styled-components";
 import { cores } from "../../styles";
 
 import { Props } from '.'

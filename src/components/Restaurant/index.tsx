@@ -1,23 +1,28 @@
-import prato1 from '../../assets/img/sushi.png'
-import star from '../../assets/icons/star.png'
+import Tag from '../Tag'
+import { Card, TitleRating, Titulo, ContainerAvaliacao, Avaliacao, Descricao, Button } from './styles'
 
-import Tag from "../Tag"
-import { Card, Titulo, TitleRating, ContainerAvaliacao, Avaliacao, Descricao, Button } from './styles'
+type Props = {
+  tag: string[],
+  image: string,
+  titulo: string,
+  avaliacao: number,
+  descricao: string
+}
 
-const Product = () => (
-    <Card>
-      <Tag size="small">Nacionalidade</Tag>
-      <img src={prato1} />
-      <TitleRating>
-        <Titulo>Nome do Restaurante</Titulo>
-        <ContainerAvaliacao>
-          <Avaliacao>4.9</Avaliacao>
-          <img src={star} alt="" />
-        </ContainerAvaliacao>
-      </TitleRating>
-      <Descricao>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate sed repudiandae veritatis id corporis nulla cum, impedit quas at facilis ut sequi ex explicabo illum quibusdam libero error harum veniam!</Descricao>
-      <Button>Saiba mais</Button>
-    </Card>
-  )
- 
-export default Product
+const Restaurant = ({ tag, image, titulo, avaliacao, descricao }: Props) => (
+  <Card>
+    <Tag>{tag}</Tag>
+    <img src={image} alt="foto do prato"/>
+    <TitleRating>
+      <Titulo>{titulo}</Titulo>
+      <ContainerAvaliacao>
+        <Avaliacao>{avaliacao}</Avaliacao>
+        <img src={image} alt="estrela da avalização" />
+      </ContainerAvaliacao>
+    </TitleRating>
+    <Descricao>{descricao}</Descricao>
+    <Button>Saiba mais</Button>
+  </Card>
+)
+
+export default Restaurant

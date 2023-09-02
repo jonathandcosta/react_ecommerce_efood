@@ -7,13 +7,11 @@ export const Card = styled.div`
   margin: 0 auto;
   margin-top: 80px;
   position: relative;
-
   > img {
     width: 100%;
     height: 217px;
     object-fit: cover;
   }
-
    ${TagContainer} {
     position: absolute;
     right: 16px;
@@ -22,7 +20,6 @@ export const Card = styled.div`
     gap: 8px;
   }
 `
-
 export const Titulo = styled.h3`
   font-weight: bold;
   font-size: 18px;
@@ -31,7 +28,6 @@ export const Titulo = styled.h3`
   margin-left: 7px;
   margin-bottom: 16px;
 `
-
 export const TitleRating = styled.div`
   display: flex;
   justify-content: space-between;
@@ -47,7 +43,6 @@ export const Avaliacao = styled.span`
   font-size: 18px;
   font-weight: bold;
 `
-
 export const Descricao = styled.p`
   font-weight: bold;
   font-size: 14px;
@@ -56,7 +51,6 @@ export const Descricao = styled.p`
   display: block;
   margin-bottom: 16px;
 `
-
 export const Button = styled.button`
   background-color: ${cores.primary};
   color: ${cores.title};
