@@ -1,4 +1,5 @@
 import Tag from '../Tag'
+import star from '../../assets/icons/star.png'
 import { Card, TitleRating, Titulo, ContainerAvaliacao, Avaliacao, Descricao, Button } from './styles'
 
 type Props = {
@@ -12,12 +13,12 @@ type Props = {
 const Restaurant = ({ tag, image, titulo, avaliacao, descricao }: Props) => (
   <Card>
     <Tag>{tag}</Tag>
-    <img src={image} alt="foto do prato"/>
+    <img src={image} alt="foto do prato" />
     <TitleRating>
       <Titulo>{titulo}</Titulo>
       <ContainerAvaliacao>
         <Avaliacao>{avaliacao}</Avaliacao>
-        <img src={image} alt="estrela da avalização" />
+        <img src={star} alt="estrela" />
       </ContainerAvaliacao>
     </TitleRating>
     <Descricao>{descricao}</Descricao>
