@@ -1,5 +1,5 @@
 class Restaurants {
-  tag: string
+  tag: string[]
   image: string
   titulo: string
   avaliacao: number
@@ -8,7 +8,7 @@ class Restaurants {
 
   constructor (
     id: number,
-    tag: string,
+    tag: string[],
     image: string,
     titulo: string,
     avaliacao: number,

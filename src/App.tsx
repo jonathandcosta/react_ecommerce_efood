@@ -1,16 +1,12 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import HeaderHome from "./components/HeaderHome"
 import { Container, GlobalCss } from "./styles"
-import RestaurantList from "./components/RestaurantList"
+import Home from "./pages/Home"
 
 const rotas = createBrowserRouter([
   {
     path: '/',
-    element:(
-      <>
-        <RestaurantList />
-      </>
-    )
+    element: <Home />
   }
 ])
 
@@ -26,7 +22,7 @@ function App() {
           </div>
         </Container>
       </div>
-      
+
     </>
 
   )
