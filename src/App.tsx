@@ -1,31 +1,17 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom"
-import HeaderHome from "./components/HeaderHome"
-import { Container, GlobalCss } from "./styles"
-import Home from "./pages/Home"
+import { BrowserRouter } from "react-router-dom"
 
-const rotas = createBrowserRouter([
-  {
-    path: '/',
-    element: <Home />
-  }
-])
+import { GlobalCss } from "./styles"
+import Rotas from './routes'
 
 function App() {
   return (
-    <>
+    <BrowserRouter>
       <GlobalCss />
       <div>
-        <HeaderHome />
-        <Container>
-          <div>
-            <RouterProvider router={rotas} />
-          </div>
-        </Container>
+        <Rotas />
       </div>
-
-    </>
-
-  )
+      <BrowserRouter />
+      )
 }
 
-export default App
+      export default App

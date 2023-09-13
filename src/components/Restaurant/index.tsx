@@ -1,6 +1,8 @@
+import { Link } from 'react-router-dom'
+import { Card, TitleRating, Titulo, ContainerAvaliacao, Avaliacao, Descricao, Button } from './styles'
+
 import Tag from '../Tag'
 import star from '../../assets/icons/star.png'
-import { Card, TitleRating, Titulo, ContainerAvaliacao, Avaliacao, Descricao, Button } from './styles'
 
 type Props = {
   tag: string[],
@@ -22,7 +24,7 @@ const Restaurant = ({ tag, image, titulo, avaliacao, descricao }: Props) => (
       </ContainerAvaliacao>
     </TitleRating>
     <Descricao>{descricao}</Descricao>
-    <Button>Saiba mais</Button>
+    <Button><Link to="/Profile">Saiba mais</Link></Button>
   </Card>
 )
 

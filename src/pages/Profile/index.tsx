@@ -1,13 +1,15 @@
+import HeaderProfile from "../../components/HeaderProfile"
 import RestaurantList from "../../components/RestaurantList"
-import HeaderHome from "../../components/HeaderHome"
 import Restaurants from "../../models/restaurants"
+
+import { Container } from "../../styles"
+import { List } from "./styles"
 
 import sushi from '../../assets/img/sushi.png'
 import pasta from '../../assets/img/pasta.png'
 import brownie from '../../assets/img/brownie.png'
 import burger from '../../assets/img/burger.png'
 import meal from '../../assets/img/meal.png'
-import { Container } from "../../styles"
 
 
 const principal: Restaurants[] = [
@@ -61,13 +63,15 @@ const principal: Restaurants[] = [
   },
 ]
 
-const Home = () => (
+const Profile = () => (
   <>
-    <HeaderHome />
+    <HeaderProfile />
     <Container>
-      <RestaurantList restaurant={principal} />
+      <List>
+        <RestaurantList restaurant={principal} />
+      </List>
     </Container>
   </>
 )
 
-export default Home
+export default Profile
