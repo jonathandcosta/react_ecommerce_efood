@@ -10,8 +10,8 @@ function App() {
       <div>
         <Rotas />
       </div>
-      <BrowserRouter />
-      )
+    </BrowserRouter>
+  )
 }
 
-      export default App
+export default App
