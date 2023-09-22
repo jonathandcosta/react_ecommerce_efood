@@ -1,18 +1,18 @@
-import { Hero, ImagemHero, ImagemLogo, Title } from './styles'
+import { Link } from 'react-router-dom'
+import { ImagemHero, ImagemLogo, Name } from './styles'
 
 import img from '../../assets/img/hero1.png'
 import logo from '../../assets/icons/logo.png'
 
 const HeaderProfile = () => (
   <>
-    <Hero>
+    <ImagemHero style={{ backgroundImage: `url(${img})` }}>
+      <Link to="/">
+        <Name>Restaurantes</Name>
+      </Link>
       <ImagemLogo style={{ backgroundImage: `url(${logo})` }}></ImagemLogo>
-      <ImagemHero style={{ backgroundImage: `url(${img})` }}>
-
-        <Title>Viva experiências gastronômicas no conforto da sua casa</Title>
-      </ImagemHero>
-
-    </Hero>
+      <Name>0 Produto no Carrinho</Name>
+    </ImagemHero>
   </>
 )
 

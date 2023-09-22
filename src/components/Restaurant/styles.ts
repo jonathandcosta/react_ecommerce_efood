@@ -59,6 +59,5 @@ export const Button = styled.button`
   padding: 4px 6px;
   border: none;
   cursor: pointer;
-  text-decoration: none;
   margin: 0px 0px 8px 8px;
 `
