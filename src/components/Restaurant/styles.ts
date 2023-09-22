@@ -53,11 +53,14 @@ export const Descricao = styled.p`
 `
 export const Button = styled.button`
   background-color: ${cores.primary};
-  color: ${cores.title};
   font-size: 14px;
   font-weight: bold;
   padding: 4px 6px;
   border: none;
   cursor: pointer;
   margin: 0px 0px 8px 8px;
+
+  a {
+    color: ${cores.title};
+  }
 `
