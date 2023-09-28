@@ -1,19 +1,23 @@
 import HeaderProfile from "../../components/HeaderProfile"
+import DishCard from "../../components/DishCard"
 
 
 import { Container } from "../../styles"
-import { List } from "./styles"
+import { ContainerList } from "./styles"
+import BannerDish from "../../components/BannerDish"
 
 
 
 const Profile = () => (
   <>
     <HeaderProfile />
-    <p>aqui vem a imagem do restaurante selecionado</p>
+    <BannerDish />
     <Container>
-      <List>
-        <p>aqui vem os pratos do restaurante selecionado</p>
-      </List>
+      <ContainerList>
+        <DishCard />
+        <DishCard />
+        <DishCard />
+      </ContainerList>
     </Container>
   </>
 )
