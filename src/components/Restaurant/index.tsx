@@ -5,17 +5,17 @@ import Tag from '../Tag'
 import star from '../../assets/icons/star.png'
 
 type Props = {
-  tag: string[],
-  image: string,
+  destacado: string[],
+  capa: string,
   titulo: string,
   avaliacao: number,
   descricao: string
 }
 
-const Restaurant = ({ tag, image, titulo, avaliacao, descricao }: Props) => (
+const Restaurant = ({ destacado, capa, titulo, avaliacao, descricao }: Props) => (
   <Card>
-    <Tag>{tag}</Tag>
-    <img src={image} alt="foto do prato" />
+    <Tag>{destacado}</Tag>
+    <img src={capa} alt="foto do restaurante" />
     <TitleRating>
       <Titulo>{titulo}</Titulo>
       <ContainerAvaliacao>

@@ -1,19 +1,20 @@
 declare interface Dish {
+  foto: string
+  preco: number
   id: number
   nome: string
-  foto: string
   descricao: string
-  preco: number
   porcao: string
 }
 
 declare type Restaurants = {
+  [x: string]: string[]
   id: number
   titulo: string
-  capa: string
-  tipo: string
   destacado: boolean
+  tipo: string
   avaliacao: number
   descricao: string
+  capa: string
   cardapio: Dish[]
 }
