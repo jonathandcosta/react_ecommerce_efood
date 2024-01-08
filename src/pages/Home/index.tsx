@@ -13,6 +13,7 @@ export type Restaurants = {
   avaliacao: number
   descricao: string
   capa: string
+  cardapio: string[]
 }
 
 const Home = () => {

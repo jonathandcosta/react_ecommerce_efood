@@ -1,20 +1,25 @@
 import { Link } from 'react-router-dom'
-import { Card, TitleRating, Titulo, ContainerAvaliacao, Avaliacao, Descricao, Button } from './styles'
+import { Card, TitleRating, TagWrapper, Titulo, ContainerAvaliacao, Avaliacao, Descricao, Button } from './styles'
 
 import Tag from '../Tag'
 import star from '../../assets/icons/star.png'
 
 type Props = {
-  destacado: string[],
+  id: number,
+  destacado: boolean,
   capa: string,
+  tipo: string,
   titulo: string,
   avaliacao: number,
   descricao: string
 }
 
-const Restaurant = ({ destacado, capa, titulo, avaliacao, descricao }: Props) => (
+const Restaurant = ({ id, destacado, tipo, capa, titulo, avaliacao, descricao }: Props) => (
   <Card>
-    <Tag>{destacado}</Tag>
+    <TagWrapper>
+      {destacado && <Tag>{'Destaque da semana'}</Tag>}
+      <Tag>{tipo}</Tag>
+    </TagWrapper>
     <img src={capa} alt="foto do restaurante" />
     <TitleRating>
       <Titulo>{titulo}</Titulo>
@@ -24,7 +29,7 @@ const Restaurant = ({ destacado, capa, titulo, avaliacao, descricao }: Props) =>
       </ContainerAvaliacao>
     </TitleRating>
     <Descricao>{descricao}</Descricao>
-    <Button><Link to="/Profile">Saiba mais</Link></Button>
+    <Button><Link to={`/Profile/${id}`}>Saiba mais</Link></Button>
   </Card>
 )
 

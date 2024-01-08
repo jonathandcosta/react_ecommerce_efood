@@ -20,6 +20,12 @@ export const Card = styled.div`
     gap: 8px;
   }
 `
+
+export const TagWrapper = styled.div`
+  display: flex;
+  gap: 8px;
+`
+
 export const Titulo = styled.h3`
   font-weight: bold;
   font-size: 18px;

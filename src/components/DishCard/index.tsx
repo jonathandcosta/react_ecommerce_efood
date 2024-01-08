@@ -1,40 +1,49 @@
+import { useState } from "react"
 import { Card, Modal, ModalContent, Overlay } from "./style"
-import { useState } from "react";
-
-import food from "../../assets/img/pizza.png"
+import { Cardapio } from "../../pages/Profile"
 import close from "../../assets/img/close.png"
 
 
-const DishCard = () => {
+const DishCard = ({ cardapio }: Cardapio) => {
   const [modalEstaAberto, setModalEstaAberto] = useState(false);
+  const [indexModal, setIndexModal] = useState(0);
 
+  const handleClick = (index: number) => {
+    setIndexModal(index)
+    setModalEstaAberto(true)
+  }
 
   return (
     <>
-      <Card>
-        <img src={food} alt="Pizza" />
-        <h3>Pizza Marguerita</h3>
-        <p>A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!</p>
-        <button onClick={() => setModalEstaAberto(true)}>Adicionar ao Carrinho</button>
-      </Card>
-
-      <Modal className={modalEstaAberto ? 'visivel' : ''}>
-        <ModalContent className="container">
-          <header>
-            <img src={close} alt="fechar modal" onClick={() => setModalEstaAberto(false)} />
-          </header>
-          <main>
-            <img src={food} alt="prato" />
-            <div>
-              <h3>Pizza Marguerita</h3>
-              <p>A pizza Margherita é uma pizza clássica da culinária italiana, reconhecida por sua simplicidade e sabor inigualável. Ela é feita com uma base de massa fina e crocante, coberta com molho de tomate fresco, queijo mussarela de alta qualidade, manjericão fresco e azeite de oliva extra-virgem. A combinação de sabores é perfeita, com o molho de tomate suculento e ligeiramente ácido, o queijo derretido e cremoso e as folhas de manjericão frescas, que adicionam um toque de sabor herbáceo. É uma pizza simples, mas deliciosa, que agrada a todos os paladares e é uma ótima opção para qualquer ocasião.</p>
-              <span>Serve: de 2 a 3 pessoas</span>
-              <button>Adicionaro ao Carrinho</button>
-            </div>
-          </main>
-        </ModalContent>
-        <Overlay />
-      </Modal>
+      {cardapio &&
+        cardapio.map((item, index) =>
+          <Card>
+            <img src={item.foto} alt="Pizza" />
+            <h1>{item.nome}</h1>
+            <p>{item.descricao}</p>
+            <button onClick={() => handleClick(index)}>Adicionar ao Carrinho</button>
+          </Card>
+        )
+      }
+      {typeof cardapio !== "undefined" &&
+        <Modal className={modalEstaAberto ? 'visivel' : ''}>
+          <ModalContent className="container">
+            <header>
+              <img src={close} alt="fechar modal" onClick={() => setModalEstaAberto(false)} />
+            </header>
+            <main>
+              <img src={cardapio[indexModal].foto} alt="prato" />
+              <div>
+                <h3>{cardapio[indexModal].nome}</h3>
+                <p>{cardapio[indexModal].descricao}</p>
+                <span>{cardapio[indexModal].porcao}</span>
+                <button>Adicionar ao Carrinho - R$ {cardapio[indexModal].preco}</button>
+              </div>
+            </main>
+          </ModalContent>
+          <Overlay />
+        </Modal>
+      }
     </>
   )
 }
