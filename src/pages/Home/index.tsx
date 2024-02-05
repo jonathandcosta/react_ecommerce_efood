@@ -3,7 +3,7 @@ import { Container } from "../../styles"
 import RestaurantList from "../../components/RestaurantList"
 import HeaderHome from "../../components/HeaderHome"
 
-import { useGetTopRestaurantsQuery } from '../../services/api'
+import { useGetTopRestaurantesQuery } from '../../services/api'
 
 
 export type Restaurants = {
@@ -18,7 +18,8 @@ export type Restaurants = {
 }
 
 const Home = () => {
-  const { data: TopRestaurants } = useGetTopRestaurantsQuery()
+  const { data: TopRestaurants } = useGetTopRestaurantesQuery()
+  console.log(TopRestaurants)
 
   if (TopRestaurants) {
     return (
