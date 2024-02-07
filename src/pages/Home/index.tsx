@@ -19,7 +19,6 @@ export type Restaurants = {
 
 const Home = () => {
   const { data: TopRestaurants } = useGetTopRestaurantesQuery()
-  console.log(TopRestaurants)
 
   if (TopRestaurants) {
     return (
