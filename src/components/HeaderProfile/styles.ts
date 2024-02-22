@@ -1,13 +1,13 @@
 import styled from 'styled-components'
 import { cores } from '../../styles'
 
-export const ImagemHero = styled.div `
+export const ImagemHero = styled.div`
   width: 100%;
   height: 186px;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  `
+`
 
 export const Name = styled.p`
   font-family: Roboto;
