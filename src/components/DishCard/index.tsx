@@ -3,6 +3,10 @@ import { Card, Modal, ModalContent, Overlay } from "./style"
 import { Cardapio } from "../../pages/Profile"
 import close from "../../assets/img/close.png"
 
+import { useDispatch } from "react-redux"
+import { add } from "../../store/reducers/cart"
+
+import Restaurants from "../Restaurant"
 
 const DishCard = ({ cardapio }: Cardapio) => {
   const [modalEstaAberto, setModalEstaAberto] = useState(false);
@@ -11,6 +15,11 @@ const DishCard = ({ cardapio }: Cardapio) => {
   const handleClick = (index: number) => {
     setIndexModal(index)
     setModalEstaAberto(true)
+  }
+
+  const dispatch = useDispatch()
+  const addToCart = () => {
+    dispatch(add(Restaurants))
   }
 
   return (
@@ -37,7 +46,7 @@ const DishCard = ({ cardapio }: Cardapio) => {
                 <h3>{cardapio[indexModal].nome}</h3>
                 <p>{cardapio[indexModal].descricao}</p>
                 <span>{cardapio[indexModal].porcao}</span>
-                <button>Adicionar ao Carrinho - R$ {cardapio[indexModal].preco}</button>
+                <button onClick={addToCart}>Adicionar ao Carrinho - R$ {cardapio[indexModal].preco}</button>
               </div>
             </main>
           </ModalContent>
