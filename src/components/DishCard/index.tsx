@@ -6,7 +6,6 @@ import close from "../../assets/img/close.png"
 import { useDispatch } from "react-redux"
 import { add } from "../../store/reducers/cart"
 
-import Restaurants from "../Restaurant"
 
 const DishCard = ({ cardapio }: Cardapio) => {
   const [modalEstaAberto, setModalEstaAberto] = useState(false);
@@ -18,8 +17,8 @@ const DishCard = ({ cardapio }: Cardapio) => {
   }
 
   const dispatch = useDispatch()
-  const addToCart = () => {
-    dispatch(add(Restaurants))
+  const addToCart = (index: number) => {
+    dispatch(add(cardapio[index]))
   }
 
   return (
@@ -46,7 +45,7 @@ const DishCard = ({ cardapio }: Cardapio) => {
                 <h3>{cardapio[indexModal].nome}</h3>
                 <p>{cardapio[indexModal].descricao}</p>
                 <span>{cardapio[indexModal].porcao}</span>
-                <button onClick={addToCart}>Adicionar ao Carrinho - R$ {cardapio[indexModal].preco}</button>
+                <button onClick={() => addToCart(indexModal)}>Adicionar ao Carrinho - R$ {cardapio[indexModal].preco}</button>
               </div>
             </main>
           </ModalContent>

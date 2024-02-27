@@ -9,7 +9,6 @@ export type Props = {
 
 const RestaurantList = ({ restaurant }: Props) => (
   <>
-    {console.log(restaurant)}
     <List>
       {restaurant.map((restaurants) => (
         <Restaurant

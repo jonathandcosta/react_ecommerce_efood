@@ -6,7 +6,7 @@ import HeaderProfile from "../../components/HeaderProfile"
 import BannerDish from "../../components/BannerDish"
 import DishCard from "../../components/DishCard"
 
-type dish =
+export type dish =
   {
     id: number
     foto: string
