@@ -4,7 +4,7 @@ import { Cardapio } from "../../pages/Profile"
 import close from "../../assets/img/close.png"
 
 import { useDispatch } from "react-redux"
-import { add } from "../../store/reducers/cart"
+import { add, open } from "../../store/reducers/cart"
 
 
 const DishCard = ({ cardapio }: Cardapio) => {
@@ -19,6 +19,7 @@ const DishCard = ({ cardapio }: Cardapio) => {
   const dispatch = useDispatch()
   const addToCart = (index: number) => {
     dispatch(add(cardapio[index]))
+    dispatch(open())
   }
 
   return (

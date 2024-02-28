@@ -1,14 +1,20 @@
 import { CartContainer, CartItem, Check, Overlay, Sidebar, Title, Value } from "./style"
 
-import pizza from '../../assets/img/pizza.png'
 import trash from '../../assets/img/lixeira-de-reciclagem 1.png'
 import { useDispatch, useSelector } from "react-redux"
 import { RootReducer } from "../../store"
 import { close } from '../../store/reducers/cart'
 
+export const formataPreco = (preco = 0) => {
+  return new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  }).format(preco)
+}
+
 
 const Cart = () => {
-  const { isOpen } = useSelector((state: RootReducer) => state.cart)
+  const { isOpen, items } = useSelector((state: RootReducer) => state.cart)
 
   const dispatch = useDispatch()
   const closeCart = () => {
@@ -21,30 +27,16 @@ const Cart = () => {
         <Overlay onClick={closeCart} />
         <Sidebar>
           <ul>
-            <CartItem>
-              <img src={pizza} alt="" />
-              <div>
-                <Title>Nome do prato</Title>
-                <Value>R$ 60,00</Value>
-                <button type="button" > <img src={trash} alt="" /></button>
-              </div>
-            </CartItem>
-            <CartItem>
-              <img src={pizza} alt="" />
-              <div>
-                <Title>Nome do prato</Title>
-                <Value>R$ 60,00</Value>
-                <button type="button" > <img src={trash} alt="" /></button>
-              </div>
-            </CartItem>
-            <CartItem>
-              <img src={pizza} alt="" />
-              <div>
-                <Title>Nome do prato</Title>
-                <Value>R$ 60,00</Value>
-                <button type="button" > <img src={trash} alt="" /></button>
-              </div>
-            </CartItem>
+            {items.map((item) => (
+              <CartItem key={item.id}>
+                <img src={item.foto} alt={item.nome} />
+                <div>
+                  <Title>{item.nome}</Title>
+                  <Value>{formataPreco(item.preco)}</Value>
+                  <button type="button" > <img src={trash} alt="lixeira" /></button>
+                </div>
+              </CartItem>
+            ))}
           </ul>
           <Check>
             <p>Valor Total</p>
