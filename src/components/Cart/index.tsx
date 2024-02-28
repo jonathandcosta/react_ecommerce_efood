@@ -21,6 +21,12 @@ const Cart = () => {
     dispatch(close())
   }
 
+  const getTotalPrice = () => {
+    return items.reduce((acumulador, valorAtual) => {
+      return (acumulador += valorAtual.preco!)
+    }, 0)
+  }
+
   return (
     (
       <CartContainer className={isOpen ? 'is-open' : ''}>
@@ -40,7 +46,7 @@ const Cart = () => {
           </ul>
           <Check>
             <p>Valor Total</p>
-            <p>R$ 182,70</p>
+            <p>{formataPreco(getTotalPrice())} {''}</p>
           </Check>
           <button type="button">Adicionar ao carrinho</button>
         </Sidebar>
