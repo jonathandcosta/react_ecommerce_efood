@@ -5,10 +5,14 @@ import img from '../../assets/img/hero1.png'
 import logo from '../../assets/icons/logo.png'
 
 import { open } from '../../store/reducers/cart'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootReducer } from '../../store'
 
 const HeaderProfile = () => {
   const dispatch = useDispatch()
+  const { items } = useSelector((state: RootReducer) => state.cart)
+
+
   const openCart = () => {
     dispatch(open())
   }
@@ -21,7 +25,7 @@ const HeaderProfile = () => {
             <Name>Restaurantes</Name>
           </Link>
           <ImagemLogo style={{ backgroundImage: `url(${logo})` }}></ImagemLogo>
-          <Link to={"#"} onClick={openCart}><Name>0 Produto no Carrinho</Name></Link>
+          <Link to={"#"} onClick={openCart}><Name>{items.length} Produto no Carrinho</Name></Link>
         </ImagemHero>
       </>
     )
