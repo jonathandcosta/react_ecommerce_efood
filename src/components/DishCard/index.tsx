@@ -5,6 +5,7 @@ import close from "../../assets/img/close.png"
 
 import { useDispatch } from "react-redux"
 import { add, open } from "../../store/reducers/cart"
+import { formataPreco } from "../Cart"
 
 
 const DishCard = ({ cardapio }: Cardapio) => {
@@ -46,7 +47,7 @@ const DishCard = ({ cardapio }: Cardapio) => {
                 <h3>{cardapio[indexModal].nome}</h3>
                 <p>{cardapio[indexModal].descricao}</p>
                 <span>{cardapio[indexModal].porcao}</span>
-                <button onClick={() => addToCart(indexModal)}>Adicionar ao Carrinho - R$ {cardapio[indexModal].preco}</button>
+                <button onClick={() => addToCart(indexModal)}>Adicionar ao Carrinho - {formataPreco(cardapio[indexModal].preco)}</button>
               </div>
             </main>
           </ModalContent>
