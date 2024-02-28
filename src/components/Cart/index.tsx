@@ -3,7 +3,7 @@ import { CartContainer, CartItem, Check, Overlay, Sidebar, Title, Value } from "
 import trash from '../../assets/img/lixeira-de-reciclagem 1.png'
 import { useDispatch, useSelector } from "react-redux"
 import { RootReducer } from "../../store"
-import { close } from '../../store/reducers/cart'
+import { close, remove } from '../../store/reducers/cart'
 
 export const formataPreco = (preco = 0) => {
   return new Intl.NumberFormat('pt-BR', {
@@ -27,6 +27,10 @@ const Cart = () => {
     }, 0)
   }
 
+  const removeItem = (id: number) => {
+    dispatch(remove(id))
+  }
+
   return (
     (
       <CartContainer className={isOpen ? 'is-open' : ''}>
@@ -39,7 +43,7 @@ const Cart = () => {
                 <div>
                   <Title>{item.nome}</Title>
                   <Value>{formataPreco(item.preco)}</Value>
-                  <button type="button" > <img src={trash} alt="lixeira" /></button>
+                  <button onClick={() => removeItem(item.id)} type="button" > <img src={trash} alt="lixeira" /></button>
                 </div>
               </CartItem>
             ))}
