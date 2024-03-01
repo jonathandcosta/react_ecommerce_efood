@@ -59,7 +59,8 @@ export const CartItem = styled.li`
   img {
     width: 80px;
     height: 80px;
-    object-fit: fill;
+    object-fit: cover;
+    margin-left: 8px;
   }
 
   div {

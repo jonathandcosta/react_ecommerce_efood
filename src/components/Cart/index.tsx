@@ -52,7 +52,7 @@ const Cart = () => {
             <p>Valor Total</p>
             <p>{formataPreco(getTotalPrice())} {''}</p>
           </Check>
-          <button type="button">Adicionar ao carrinho</button>
+          <button type="button">Continuar com a entrega</button>
         </Sidebar>
       </CartContainer>
     )
