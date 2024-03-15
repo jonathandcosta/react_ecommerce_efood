@@ -4,6 +4,7 @@ import trash from '../../assets/img/lixeira-de-reciclagem 1.png'
 import { useDispatch, useSelector } from "react-redux"
 import { RootReducer } from "../../store"
 import { close, remove } from '../../store/reducers/cart'
+import CardDelivery from "../CardDelivery"
 
 export const formataPreco = (preco = 0) => {
   return new Intl.NumberFormat('pt-BR', {
@@ -53,6 +54,7 @@ const Cart = () => {
             <p>{formataPreco(getTotalPrice())} {''}</p>
           </Check>
           <button type="button">Continuar com a entrega</button>
+          <CardDelivery></CardDelivery>
         </Sidebar>
       </CartContainer>
     )
