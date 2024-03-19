@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { RootReducer } from "../../store"
 import { close, remove } from '../../store/reducers/cart'
 import CardDelivery from "../CardDelivery"
+import CardPayment from "../CardPayment"
 
 export const formataPreco = (preco = 0) => {
   return new Intl.NumberFormat('pt-BR', {
@@ -55,6 +56,7 @@ const Cart = () => {
           </Check>
           <button type="button">Continuar com a entrega</button>
           <CardDelivery></CardDelivery>
+          <CardPayment></CardPayment>
         </Sidebar>
       </CartContainer>
     )

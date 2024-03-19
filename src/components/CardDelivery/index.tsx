@@ -30,13 +30,12 @@ const CardDelivery = () => (
         <label htmlFor="completAdress">Complemento (opcional)</label>
         <input id="completAdress" type="text" />
       </InputGroup>
+      <Buttons>
+        <ButtonDelivery type='button' title='clique aqui para ir ao pagamento'>Continuar com o pagamento</ButtonDelivery>
+        <ButtonDelivery type='button' title='clique aqui para voltar ao carrinho'>Voltar para o carrinho</ButtonDelivery>
+      </Buttons>
     </div>
-    <Buttons>
-      <ButtonDelivery type='button' title='clique aqui para ir ao pagamento'>Continuar com o pagamento</ButtonDelivery>
-      <ButtonDelivery type='button' title='clique aqui para voltar ao carrinho'>Voltar para o carrinho</ButtonDelivery>
-
-    </Buttons>
-  </ContainerDelivery>
+  </ContainerDelivery >
 )
 
 export default CardDelivery
