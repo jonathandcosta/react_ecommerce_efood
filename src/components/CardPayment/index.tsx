@@ -1,4 +1,5 @@
 import { useFormik } from 'formik'
+import * as Yup from 'yup'
 import { InputGroup, ContainerDelivery, Buttons, ButtonDelivery } from './style'
 
 const CardPayment = () => {
@@ -11,6 +12,25 @@ const CardPayment = () => {
       monthCard: '',
       yearCard: '',
     },
+    validationSchema: Yup.object({
+      fullName: Yup.string()
+        .min(5, 'O nome precisa ter pelo menos 5 caracteres')
+        .required('O campo é obrigatório'),
+      numberCard: Yup.string()
+        .min(16, 'Precisa ter 16 caracteres')
+        .max(17, 'Precisa ter 16 caracteres')
+        .required('O campo é obrigatório'),
+      cvv: Yup.string()
+        .min(3, 'Precisa ter 3 caracteres')
+        .max(3, 'Precisa ter 3 caracteres')
+        .required('O campo é obrigatório'),
+      monthCard: Yup.string()
+        .min(2, 'Precisa ter  caracteres')
+        .required('O campo é obrigatório'),
+      yearCard: Yup.string()
+        .min(4, 'Precisa ter 4 caracteres')
+        .required('O campo é obrigatório'),
+    }),
     onSubmit: (values) => {
       console.log(values)
     }
