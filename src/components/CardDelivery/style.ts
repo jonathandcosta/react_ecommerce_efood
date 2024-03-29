@@ -46,6 +46,10 @@ export const NumberAdress = styled.div`
   justify-content: space-between;
 `
 
+export const Error = styled.small`
+  background-color: red;
+`
+
 export const Buttons = styled.div`
   margin-top: 24px;
 `

@@ -1,6 +1,6 @@
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import { InputGroup, ContainerDelivery, Buttons, ButtonDelivery } from './style'
+import { InputGroup, ContainerDelivery, Error, Buttons, ButtonDelivery } from './style'
 
 const CardPayment = () => {
 
@@ -18,7 +18,7 @@ const CardPayment = () => {
         .required('O campo é obrigatório'),
       numberCard: Yup.string()
         .min(16, 'Precisa ter 16 caracteres')
-        .max(17, 'Precisa ter 16 caracteres')
+        .max(16, 'Precisa ter 16 caracteres')
         .required('O campo é obrigatório'),
       cvv: Yup.string()
         .min(3, 'Precisa ter 3 caracteres')
@@ -26,8 +26,10 @@ const CardPayment = () => {
         .required('O campo é obrigatório'),
       monthCard: Yup.string()
         .min(2, 'Precisa ter  caracteres')
+        .max(4, 'Precisa ter  caracteres')
         .required('O campo é obrigatório'),
       yearCard: Yup.string()
+        .min(2, 'Precisa ter 4 caracteres')
         .min(4, 'Precisa ter 4 caracteres')
         .required('O campo é obrigatório'),
     }),
@@ -36,7 +38,13 @@ const CardPayment = () => {
     }
   })
 
-  console.log(form)
+  const getErrorMessage = (fieldName: string, message?: string) => {
+    const isTouched = fieldName in form.touched
+    const isInvalid = fieldName in form.errors
+
+    if (isTouched && isInvalid) return message
+    return ''
+  }
 
   return (
     <ContainerDelivery>
@@ -50,7 +58,9 @@ const CardPayment = () => {
             name='fullName'
             value={form.values.fullName}
             onChange={form.handleChange}
-            onBlur={form.handleBlur} />
+            onBlur={form.handleBlur}
+          />
+          <Error>{getErrorMessage('fullName', form.errors.fullName)}</Error>
         </InputGroup>
         <InputGroup>
           <label htmlFor="numberCard">Número do cartão</label>
@@ -60,7 +70,9 @@ const CardPayment = () => {
             name='numberCard'
             value={form.values.numberCard}
             onChange={form.handleChange}
-            onBlur={form.handleBlur} />
+            onBlur={form.handleBlur}
+          />
+          <Error>{getErrorMessage('numberCard', form.errors.numberCard)}</Error>
         </InputGroup>
         <InputGroup>
           <label htmlFor="cvv">CVV</label>
@@ -70,7 +82,9 @@ const CardPayment = () => {
             name='cvv'
             value={form.values.cvv}
             onChange={form.handleChange}
-            onBlur={form.handleBlur} />
+            onBlur={form.handleBlur}
+          />
+          <Error>{getErrorMessage('cvv', form.errors.cvv)}</Error>
         </InputGroup>
         <InputGroup>
           <label htmlFor="monthCard">Mês de vencimento</label>
@@ -80,7 +94,9 @@ const CardPayment = () => {
             name='monthCard'
             value={form.values.monthCard}
             onChange={form.handleChange}
-            onBlur={form.handleBlur} />
+            onBlur={form.handleBlur}
+          />
+          <Error>{getErrorMessage('monthCard', form.errors.monthCard)}</Error>
         </InputGroup>
         <InputGroup>
           <label htmlFor="yearCard">Ano de vencimento</label>
@@ -90,7 +106,9 @@ const CardPayment = () => {
             name='yearCard'
             value={form.values.yearCard}
             onChange={form.handleChange}
-            onBlur={form.handleBlur} />
+            onBlur={form.handleBlur}
+          />
+          <Error>{getErrorMessage('yearCard', form.errors.yearCard)}</Error>
         </InputGroup>
         <Buttons>
           <ButtonDelivery type='button' title='clique aqui para finalizar o pagamento'>Finalizar pagamento</ButtonDelivery>

@@ -1,6 +1,6 @@
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import { InputGroup, ContainerDelivery, NumberAdress, Buttons, ButtonDelivery } from './style'
+import { InputGroup, ContainerDelivery, NumberAdress, Error, Buttons, ButtonDelivery } from './style'
 
 const CardDelivery = () => {
 
@@ -24,21 +24,27 @@ const CardDelivery = () => {
         .min(5, 'O nome precisa ter pelo menos 5 caracteres')
         .required('O campo é obrigatório'),
       cep: Yup.string()
-        .min(5, 'O nome precisa ter pelo menos 5 caracteres')
+        .min(8, 'O nome precisa ter pelo menos 5 caracteres')
         .required('O campo é obrigatório'),
       numberHome: Yup.string()
-        .min(5, 'O nome precisa ter pelo menos 5 caracteres')
+        .min(4, 'O nome precisa ter pelo menos 5 caracteres')
+        .max(5, 'O nome precisa ter pelo menos 5 caracteres')
         .required('O campo é obrigatório'),
       completAdress: Yup.string()
         .min(5, 'O nome precisa ter pelo menos 5 caracteres')
-        .required('O campo é obrigatório'),
     }),
     onSubmit: (values) => {
       console.log(values)
     }
   })
 
-  console.log(form)
+  const getErrorMessage = (fieldName: string, message?: string) => {
+    const isTouched = fieldName in form.touched
+    const isInvalid = fieldName in form.errors
+
+    if (isTouched && isInvalid) return message
+    return ''
+  }
 
   return (
     <ContainerDelivery>
@@ -54,6 +60,7 @@ const CardDelivery = () => {
             onChange={form.handleChange}
             onBlur={form.handleBlur}
           />
+          <Error>{getErrorMessage('fullName', form.errors.fullName)}</Error>
         </InputGroup>
         <InputGroup>
           <label htmlFor="adress">Endereço</label>
@@ -63,7 +70,9 @@ const CardDelivery = () => {
             name='adress'
             value={form.values.adress}
             onChange={form.handleChange}
-            onBlur={form.handleBlur} />
+            onBlur={form.handleBlur}
+          />
+          <Error>{getErrorMessage('adress', form.errors.adress)}</Error>
         </InputGroup>
         <InputGroup>
           <label htmlFor="city">Cidade</label>
@@ -73,7 +82,9 @@ const CardDelivery = () => {
             name='city'
             value={form.values.city}
             onChange={form.handleChange}
-            onBlur={form.handleBlur} />
+            onBlur={form.handleBlur}
+          />
+          <Error>{getErrorMessage('city', form.errors.city)}</Error>
         </InputGroup>
         <NumberAdress>
           <InputGroup maxWidth="155px">
@@ -84,7 +95,9 @@ const CardDelivery = () => {
               name='cep'
               value={form.values.cep}
               onChange={form.handleChange}
-              onBlur={form.handleBlur} />
+              onBlur={form.handleBlur}
+            />
+            <Error>{getErrorMessage('cep', form.errors.cep)}</Error>
           </InputGroup>
           <InputGroup maxWidth="155px">
             <label htmlFor="numberHome">Número</label>
@@ -96,6 +109,7 @@ const CardDelivery = () => {
               onChange={form.handleChange}
               onBlur={form.handleBlur}
             />
+            <Error>{getErrorMessage('numberHome', form.errors.numberHome)}</Error>
           </InputGroup>
         </NumberAdress>
         <InputGroup>
@@ -106,7 +120,8 @@ const CardDelivery = () => {
             name='completAdress'
             value={form.values.completAdress}
             onChange={form.handleChange}
-            onBlur={form.handleBlur} />
+            onBlur={form.handleBlur}
+          />
         </InputGroup>
         <Buttons>
           <ButtonDelivery type='button' title='clique aqui para ir ao pagamento'>Continuar com o pagamento</ButtonDelivery>
