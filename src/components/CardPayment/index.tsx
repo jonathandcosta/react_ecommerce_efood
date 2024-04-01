@@ -6,14 +6,14 @@ const CardPayment = () => {
 
   const form = useFormik({
     initialValues: {
-      fullName: '',
+      cardOwner: '',
       numberCard: '',
       cvv: '',
       monthCard: '',
       yearCard: '',
     },
     validationSchema: Yup.object({
-      fullName: Yup.string()
+      cardOwner: Yup.string()
         .min(5, 'O nome precisa ter pelo menos 5 caracteres')
         .required('O campo é obrigatório'),
       numberCard: Yup.string()
@@ -51,16 +51,16 @@ const CardPayment = () => {
       <form onSubmit={form.handleSubmit}>
         <h2>Pagamento - Valor a pagar R$ 190,90</h2>
         <InputGroup>
-          <label htmlFor="fullName">Nome no cartão</label>
+          <label htmlFor="cardOwner">Nome no cartão</label>
           <input
             type="text"
-            id='fullName'
-            name='fullName'
-            value={form.values.fullName}
+            id='cardOwner'
+            name='cardOwner'
+            value={form.values.cardOwner}
             onChange={form.handleChange}
             onBlur={form.handleBlur}
           />
-          <Error>{getErrorMessage('fullName', form.errors.fullName)}</Error>
+          <Error>{getErrorMessage('fullName', form.errors.cardOwner)}</Error>
         </InputGroup>
         <InputGroup>
           <label htmlFor="numberCard">Número do cartão</label>
