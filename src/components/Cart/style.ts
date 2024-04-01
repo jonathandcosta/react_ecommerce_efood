@@ -118,6 +118,18 @@ export const ContainerDelivery = styled.div`
   }
 `
 
+export const ContainerPayment = styled.div`
+  margin-top: 32px;
+
+  h2 {
+    color: ${cores.secondary};
+    font-size: 16px;
+    line-height: 18px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+`
+
 export const InputGroup = styled.div<InputGroupProps>`
   max-width: ${(props) => props.maxWidth || 'auto'};
   label {
@@ -140,6 +152,10 @@ export const InputGroup = styled.div<InputGroupProps>`
     line-height: 16px;
     padding: 8px;
   }
+`
+export const NumberAdress = styled.div`
+  display: flex;
+  justify-content: space-between;
 `
 
 export const Error = styled.small`

@@ -1,6 +1,6 @@
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import { InputGroup, ContainerDelivery, Error, Buttons, ButtonDelivery } from './style'
+import { InputGroup, ContainerPayment, Error, Buttons, ButtonDelivery } from './style'
 
 const CardPayment = () => {
 
@@ -47,7 +47,7 @@ const CardPayment = () => {
   }
 
   return (
-    <ContainerDelivery>
+    <ContainerPayment>
       <form onSubmit={form.handleSubmit}>
         <h2>Pagamento - Valor a pagar R$ 190,90</h2>
         <InputGroup>
@@ -115,7 +115,7 @@ const CardPayment = () => {
           <ButtonDelivery type='button' title='clique aqui para voltar editar o endereço'>Voltar para a edição de endereço</ButtonDelivery>
         </Buttons>
       </form>
-    </ContainerDelivery>
+    </ContainerPayment>
   )
 }
 

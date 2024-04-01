@@ -5,7 +5,7 @@ type InputGroupProps = {
   maxWidth?: string
 }
 
-export const ContainerDelivery = styled.div`
+export const ContainerPayment = styled.div`
   margin-top: 32px;
 
   h2 {
