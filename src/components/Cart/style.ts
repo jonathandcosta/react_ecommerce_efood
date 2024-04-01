@@ -107,7 +107,19 @@ type InputGroupProps = {
 }
 
 export const ContainerDelivery = styled.div`
-  margin-top: 32px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  justify-content: flex-end;
+  z-index: 1;
+
+  /* classe do carrinho aberto */
+  &.is-open {
+    display: flex;
+  }
 
   h2 {
     color: ${cores.secondary};
@@ -119,7 +131,19 @@ export const ContainerDelivery = styled.div`
 `
 
 export const ContainerPayment = styled.div`
-  margin-top: 32px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  justify-content: flex-end;
+  z-index: 1;
+
+  /* classe do carrinho aberto */
+  &.is-open {
+    display: flex;
+  }
 
   h2 {
     color: ${cores.secondary};
@@ -139,6 +163,7 @@ export const InputGroup = styled.div<InputGroupProps>`
     margin: 8px 0 8px;
     display: block;
     color: ${cores.secondary};
+    width: 344px;
   }
 
   input {

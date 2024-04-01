@@ -22,8 +22,19 @@ const Cart = () => {
 
   const dispatch = useDispatch()
 
+  const [openDelivery, setOpenDelivery] = useState(false)
+  const [openPayment, setOpenPayment] = useState(false)
+
   const closeCart = () => {
     dispatch(close())
+    setOpenDelivery(false)
+
+  }
+
+  const closeOverlay = () => {
+    dispatch(close())
+    setOpenDelivery(false)
+    setOpenPayment(false)
   }
 
   const getTotalPrice = () => {
@@ -108,7 +119,7 @@ const Cart = () => {
     <>
       <div>
         <CartContainer className={isOpen ? 'is-open' : ''}>
-          <Overlay onClick={closeCart} />
+          <Overlay onClick={closeOverlay} />
           <Sidebar>
             {items.length > 0 ? (
               <>
@@ -128,7 +139,7 @@ const Cart = () => {
                   <p>Valor Total</p>
                   <p>{formataPreco(getTotalPrice())} {''}</p>
                 </Check>
-                <button onClick={closeCart} type="button">Continuar com a entrega</button>
+                <button onClick={() => setOpenDelivery(!openDelivery)} type="button">Continuar com a entrega</button>
               </>
             ) : (
               <>
@@ -143,8 +154,8 @@ const Cart = () => {
       </div>
       ) : (
       <form onSubmit={form.handleSubmit}>
-        <ContainerDelivery>
-          <Overlay onClick={closeCart} />
+        <ContainerDelivery className={openDelivery ? 'is-open' : ''}>
+          <Overlay onClick={closeOverlay} />
           <Sidebar>
             <h2>Entrega</h2>
             <InputGroup>
@@ -221,13 +232,14 @@ const Cart = () => {
               />
             </InputGroup>
             <Buttons>
-              <ButtonDelivery type='button' title='clique aqui para ir ao pagamento'>Continuar com o pagamento</ButtonDelivery>
+              <ButtonDelivery onClick={() => setOpenPayment(!openPayment)} type='button' title='clique aqui para ir ao pagamento'>Continuar com o pagamento</ButtonDelivery>
               <ButtonDelivery type='button' title='clique aqui para voltar ao carrinho'>Voltar para o carrinho</ButtonDelivery>
             </Buttons>
           </Sidebar>
         </ContainerDelivery >
 
-        <ContainerPayment>
+        <ContainerPayment className={openPayment ? 'is-open' : ''}>
+          <Overlay onClick={closeOverlay} />
           <Sidebar>
             <h2>Pagamento - Valor a pagar R$ 190,90</h2>
             <InputGroup>

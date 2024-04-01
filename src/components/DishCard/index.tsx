@@ -18,6 +18,7 @@ const DishCard = ({ cardapio }: Cardapio) => {
   }
 
   const dispatch = useDispatch()
+
   const addToCart = (index: number) => {
     dispatch(add(cardapio[index]))
     dispatch(open())
