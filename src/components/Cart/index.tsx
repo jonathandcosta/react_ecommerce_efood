@@ -28,13 +28,21 @@ const Cart = () => {
   const closeCart = () => {
     dispatch(close())
     setOpenDelivery(false)
-
   }
 
   const closeOverlay = () => {
     dispatch(close())
     setOpenDelivery(false)
     setOpenPayment(false)
+  }
+
+  const backDelivery = () => {
+    setOpenDelivery(true)
+    setOpenPayment(false)
+  }
+
+  const backCart = () => {
+    setOpenDelivery(false)
   }
 
   const getTotalPrice = () => {
@@ -119,7 +127,7 @@ const Cart = () => {
     <>
       <div>
         <CartContainer className={isOpen ? 'is-open' : ''}>
-          <Overlay onClick={closeOverlay} />
+          <Overlay onClick={closeCart} />
           <Sidebar>
             {items.length > 0 ? (
               <>
@@ -233,7 +241,7 @@ const Cart = () => {
             </InputGroup>
             <Buttons>
               <ButtonDelivery onClick={() => setOpenPayment(!openPayment)} type='button' title='clique aqui para ir ao pagamento'>Continuar com o pagamento</ButtonDelivery>
-              <ButtonDelivery type='button' title='clique aqui para voltar ao carrinho'>Voltar para o carrinho</ButtonDelivery>
+              <ButtonDelivery onClick={backCart} type='button' title='clique aqui para voltar ao carrinho'>Voltar para o carrinho</ButtonDelivery>
             </Buttons>
           </Sidebar>
         </ContainerDelivery >
@@ -304,7 +312,7 @@ const Cart = () => {
             </InputGroup>
             <Buttons>
               <ButtonDelivery type='button' title='clique aqui para finalizar o pagamento'>Finalizar pagamento</ButtonDelivery>
-              <ButtonDelivery type='button' title='clique aqui para voltar editar o endereço'>Voltar para a edição de endereço</ButtonDelivery>
+              <ButtonDelivery onClick={backDelivery} type='button' title='clique aqui para voltar editar o endereço'>Voltar para a edição de endereço</ButtonDelivery>
             </Buttons>
           </Sidebar>
         </ContainerPayment>
