@@ -1,9 +1,9 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { colors } from '../../styles'
 import { TagContainer } from '../Tag/styles'
 
 export const Card = styled.div`
-  border: solid 1px ${cores.primary};
+  border: solid 1px ${colors.primary};
   margin: 0 auto;
   margin-top: 80px;
   position: relative;
@@ -12,7 +12,7 @@ export const Card = styled.div`
     height: 217px;
     object-fit: cover;
   }
-   ${TagContainer} {
+  ${TagContainer} {
     position: absolute;
     right: 16px;
     top: 16px;
@@ -58,7 +58,7 @@ export const Descricao = styled.p`
   margin-bottom: 16px;
 `
 export const Button = styled.button`
-  background-color: ${cores.primary};
+  background-color: ${colors.primary};
   font-size: 14px;
   font-weight: bold;
   padding: 4px 6px;
@@ -67,6 +67,6 @@ export const Button = styled.button`
   margin: 0px 0px 8px 8px;
 
   a {
-    color: ${cores.title};
+    color: ${colors.title};
   }
 `

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { colors } from '../../styles'
 
 type InputGroupProps = {
   maxWidth?: string
@@ -9,7 +9,7 @@ export const ContainerDelivery = styled.div`
   margin-top: 32px;
 
   h2 {
-    color: ${cores.secondary};
+    color: ${colors.secondary};
     font-size: 16px;
     line-height: 18px;
     font-weight: 700;
@@ -25,14 +25,14 @@ export const InputGroup = styled.div<InputGroupProps>`
     font-weight: 700;
     margin: 8px 0 8px;
     display: block;
-    color: ${cores.secondary};
+    color: ${colors.secondary};
   }
 
   input {
     border: none;
     width: 100%;
     height: 32px;
-    background-color: ${cores.secondary};
+    background-color: ${colors.secondary};
     font-size: 14px;
     color: #000;
     font-weight: 700;

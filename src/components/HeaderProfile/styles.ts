@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { colors } from '../../styles'
 
 export const ImagemHero = styled.div`
   width: 100%;
@@ -14,7 +14,7 @@ export const Name = styled.p`
   font-size: 18px;
   font-weight: 900;
   line-height: 21px;
-  color: ${cores.primary};
+  color: ${colors.primary};
 `
 
 export const ImagemLogo = styled.div`

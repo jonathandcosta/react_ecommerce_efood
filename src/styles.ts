@@ -1,9 +1,9 @@
-import styled, { createGlobalStyle } from "styled-components"
+import styled, { createGlobalStyle } from 'styled-components'
 
-export const cores = {
+export const colors = {
   primary: '#E66767',
   secondary: '#FFEBD9',
-  background:'#FFF8F2',
+  background: '#FFF8F2',
   title: '#ffffff'
 }
 
@@ -22,8 +22,8 @@ export const GlobalCss = createGlobalStyle`
   }
 
   body {
-    background-color: ${cores.background};
-    color: ${cores.primary};
+    background-color: ${colors.background};
+    color: ${colors.primary};
   }
 `
 

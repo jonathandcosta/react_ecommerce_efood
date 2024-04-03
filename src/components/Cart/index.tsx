@@ -1,23 +1,18 @@
-import { CartContainer, CartItem, Check, ContainerDelivery, InputGroup, Overlay, Sidebar, Title, Value, NumberAdress, Error, Buttons, ButtonDelivery, ContainerPayment, ConfirmationContainer, ConfirmationSidebar } from "./style"
-
-import trash from '../../assets/img/lixeira-de-reciclagem 1.png'
-import { useDispatch, useSelector } from "react-redux"
-import { RootReducer } from "../../store"
-import { close, remove } from '../../store/reducers/cart'
 import { useFormik } from "formik"
 import * as Yup from 'yup'
 import { useState } from "react"
 
-import { usePurchaseMutation } from '../../services/api'
+import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 
+import { RootReducer } from "../../store"
+import { close, remove } from '../../store/reducers/cart'
 
-export const formataPreco = (preco = 0) => {
-  return new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL'
-  }).format(preco)
-}
+import { usePurchaseMutation } from '../../services/api'
+import { parseToBrl } from "../../utils"
+
+import * as S from "./style"
+import trash from '../../assets/img/lixeira-de-reciclagem 1.png'
 
 
 const Cart = () => {
@@ -165,27 +160,27 @@ const Cart = () => {
   return (
     <>
       <div>
-        <CartContainer className={isOpen ? 'is-open' : ''}>
-          <Overlay onClick={closeCart} />
-          <Sidebar>
+        <S.CartContainer className={isOpen ? 'is-open' : ''}>
+          <S.Overlay onClick={closeCart} />
+          <S.Sidebar>
             {items.length > 0 ? (
               <>
                 <ul>
                   {items.map((item) => (
-                    <CartItem key={item.id}>
+                    <S.CartItem key={item.id}>
                       <img src={item.foto} alt={item.nome} />
                       <div>
-                        <Title>{item.nome}</Title>
-                        <Value>{formataPreco(item.preco)}</Value>
+                        <S.Title>{item.nome}</S.Title>
+                        <S.Value>{parseToBrl(item.preco)}</S.Value>
                         <button onClick={() => removeItem(item.id)} type="button" > <img src={trash} alt="lixeira" /></button>
                       </div>
-                    </CartItem>
+                    </S.CartItem>
                   ))}
                 </ul>
-                <Check>
+                <S.Check>
                   <p>Valor Total</p>
-                  <p>{formataPreco(getTotalPrice())} {''}</p>
-                </Check>
+                  <p>{parseToBrl(getTotalPrice())} {''}</p>
+                </S.Check>
                 <button onClick={() => setOpenDelivery(!openDelivery)} type="button">Continuar com a entrega</button>
               </>
             ) : (
@@ -196,16 +191,16 @@ const Cart = () => {
                   Não fique só na vontade, faça seu pedido agora!</p>
               </>
             )}
-          </Sidebar>
-        </CartContainer >
+          </S.Sidebar>
+        </S.CartContainer >
       </div>
 
       {/* INFORMAÇÕES APÓS O PAGAMENTO */}
 
       {isSuccess && data ? (
-        <ConfirmationContainer>
-          <Overlay onClick={closeOverlay} />
-          <ConfirmationSidebar>
+        <S.ConfirmationContainer>
+          <S.Overlay onClick={closeOverlay} />
+          <S.ConfirmationSidebar>
             <h3>Pedido realizado - N°: {data?.orderId}</h3>
             <p>
               Estamos felizes em informar que seu pedido já está em processo de
@@ -236,19 +231,19 @@ const Cart = () => {
               ></Link>
               Concluir
             </button>
-          </ConfirmationSidebar>
-        </ConfirmationContainer>
+          </S.ConfirmationSidebar>
+        </S.ConfirmationContainer>
 
       ) : (
 
         // INFORMAÇÕES PARA ENTREGA
 
         <form onSubmit={form.handleSubmit}>
-          <ContainerDelivery className={openDelivery ? 'is-open' : ''}>
-            <Overlay onClick={closeOverlay} />
-            <Sidebar>
+          <S.ContainerDelivery className={openDelivery ? 'is-open' : ''}>
+            <S.Overlay onClick={closeOverlay} />
+            <S.Sidebar>
               <h2>Entrega</h2>
-              <InputGroup>
+              <S.InputGroup>
                 <label htmlFor="fullName">Quem irá receber</label>
                 <input
                   id="fullName"
@@ -258,9 +253,9 @@ const Cart = () => {
                   onChange={form.handleChange}
                   onBlur={form.handleBlur}
                 />
-                <Error>{getErrorMessage('fullName', form.errors.fullName)}</Error>
-              </InputGroup>
-              <InputGroup>
+                <S.Error>{getErrorMessage('fullName', form.errors.fullName)}</S.Error>
+              </S.InputGroup>
+              <S.InputGroup>
                 <label htmlFor="adress">Endereço</label>
                 <input
                   id="adress"
@@ -270,9 +265,9 @@ const Cart = () => {
                   onChange={form.handleChange}
                   onBlur={form.handleBlur}
                 />
-                <Error>{getErrorMessage('adress', form.errors.adress)}</Error>
-              </InputGroup>
-              <InputGroup>
+                <S.Error>{getErrorMessage('adress', form.errors.adress)}</S.Error>
+              </S.InputGroup>
+              <S.InputGroup>
                 <label htmlFor="city">Cidade</label>
                 <input
                   id="city"
@@ -282,10 +277,10 @@ const Cart = () => {
                   onChange={form.handleChange}
                   onBlur={form.handleBlur}
                 />
-                <Error>{getErrorMessage('city', form.errors.city)}</Error>
-              </InputGroup>
-              <NumberAdress>
-                <InputGroup maxWidth="155px">
+                <S.Error>{getErrorMessage('city', form.errors.city)}</S.Error>
+              </S.InputGroup>
+              <S.NumberAdress>
+                <S.InputGroup maxWidth="155px">
                   <label htmlFor="cep">CEP</label>
                   <input
                     id="cep"
@@ -295,9 +290,9 @@ const Cart = () => {
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
                   />
-                  <Error>{getErrorMessage('cep', form.errors.cep)}</Error>
-                </InputGroup>
-                <InputGroup maxWidth="155px">
+                  <S.Error>{getErrorMessage('cep', form.errors.cep)}</S.Error>
+                </S.InputGroup>
+                <S.InputGroup maxWidth="155px">
                   <label htmlFor="numberHome">Número</label>
                   <input
                     id="numberHome"
@@ -307,10 +302,10 @@ const Cart = () => {
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
                   />
-                  <Error>{getErrorMessage('numberHome', form.errors.numberHome)}</Error>
-                </InputGroup>
-              </NumberAdress>
-              <InputGroup>
+                  <S.Error>{getErrorMessage('numberHome', form.errors.numberHome)}</S.Error>
+                </S.InputGroup>
+              </S.NumberAdress>
+              <S.InputGroup>
                 <label htmlFor="completAdress">Complemento (opcional)</label>
                 <input
                   id="completAdress"
@@ -320,27 +315,27 @@ const Cart = () => {
                   onChange={form.handleChange}
                   onBlur={form.handleBlur}
                 />
-              </InputGroup>
-              <Buttons>
-                <ButtonDelivery
+              </S.InputGroup>
+              <S.Buttons>
+                <S.ButtonDelivery
                   onClick={() => setOpenPayment(!openPayment)}
                   type='button'
-                  title='clique aqui para ir ao pagamento'>Continuar com o pagamento</ButtonDelivery>
-                <ButtonDelivery
+                  title='clique aqui para ir ao pagamento'>Continuar com o pagamento</S.ButtonDelivery>
+                <S.ButtonDelivery
                   onClick={backCart}
                   type='button'
-                  title='clique aqui para voltar ao carrinho'>Voltar para o carrinho</ButtonDelivery>
-              </Buttons>
-            </Sidebar>
-          </ContainerDelivery >
+                  title='clique aqui para voltar ao carrinho'>Voltar para o carrinho</S.ButtonDelivery>
+              </S.Buttons>
+            </S.Sidebar>
+          </S.ContainerDelivery >
 
           {/* INFORMAÇÕES DE PAGAMENTO */}
 
-          <ContainerPayment className={openPayment ? 'is-open' : ''}>
-            <Overlay onClick={closeOverlay} />
-            <Sidebar>
+          <S.ContainerPayment className={openPayment ? 'is-open' : ''}>
+            <S.Overlay onClick={closeOverlay} />
+            <S.Sidebar>
               <h2>Pagamento - Valor a pagar R$ 190,90</h2>
-              <InputGroup>
+              <S.InputGroup>
                 <label htmlFor="cardOwner">Nome no cartão</label>
                 <input
                   type="text"
@@ -350,9 +345,9 @@ const Cart = () => {
                   onChange={form.handleChange}
                   onBlur={form.handleBlur}
                 />
-                <Error>{getErrorMessage('fullName', form.errors.cardOwner)}</Error>
-              </InputGroup>
-              <InputGroup>
+                <S.Error>{getErrorMessage('fullName', form.errors.cardOwner)}</S.Error>
+              </S.InputGroup>
+              <S.InputGroup>
                 <label htmlFor="numberCard">Número do cartão</label>
                 <input
                   type="text"
@@ -362,9 +357,9 @@ const Cart = () => {
                   onChange={form.handleChange}
                   onBlur={form.handleBlur}
                 />
-                <Error>{getErrorMessage('numberCard', form.errors.numberCard)}</Error>
-              </InputGroup>
-              <InputGroup>
+                <S.Error>{getErrorMessage('numberCard', form.errors.numberCard)}</S.Error>
+              </S.InputGroup>
+              <S.InputGroup>
                 <label htmlFor="cvv">CVV</label>
                 <input
                   type="text"
@@ -374,9 +369,9 @@ const Cart = () => {
                   onChange={form.handleChange}
                   onBlur={form.handleBlur}
                 />
-                <Error>{getErrorMessage('cvv', form.errors.cvv)}</Error>
-              </InputGroup>
-              <InputGroup>
+                <S.Error>{getErrorMessage('cvv', form.errors.cvv)}</S.Error>
+              </S.InputGroup>
+              <S.InputGroup>
                 <label htmlFor="monthCard">Mês de vencimento</label>
                 <input
                   type="text"
@@ -386,9 +381,9 @@ const Cart = () => {
                   onChange={form.handleChange}
                   onBlur={form.handleBlur}
                 />
-                <Error>{getErrorMessage('monthCard', form.errors.monthCard)}</Error>
-              </InputGroup>
-              <InputGroup>
+                <S.Error>{getErrorMessage('monthCard', form.errors.monthCard)}</S.Error>
+              </S.InputGroup>
+              <S.InputGroup>
                 <label htmlFor="yearCard">Ano de vencimento</label>
                 <input
                   type="text"
@@ -398,21 +393,21 @@ const Cart = () => {
                   onChange={form.handleChange}
                   onBlur={form.handleBlur}
                 />
-                <Error>{getErrorMessage('yearCard', form.errors.yearCard)}</Error>
-              </InputGroup>
-              <Buttons>
-                <ButtonDelivery
+                <S.Error>{getErrorMessage('yearCard', form.errors.yearCard)}</S.Error>
+              </S.InputGroup>
+              <S.Buttons>
+                <S.ButtonDelivery
                   type='submit'
                   onClick={form.handleSubmit}
                   title='clique aqui para finalizar a compra'
                   disabled={isLoading}
                 >
                   {isLoading ? 'Finalizando pagamento...' : 'Finalizar pagamento'}
-                </ButtonDelivery>
-                <ButtonDelivery onClick={backDelivery} type='button' title='clique aqui para voltar editar o endereço'>Voltar para a edição de endereço</ButtonDelivery>
-              </Buttons>
-            </Sidebar>
-          </ContainerPayment>
+                </S.ButtonDelivery>
+                <S.ButtonDelivery onClick={backDelivery} type='button' title='clique aqui para voltar editar o endereço'>Voltar para a edição de endereço</S.ButtonDelivery>
+              </S.Buttons>
+            </S.Sidebar>
+          </S.ContainerPayment>
         </form>
       )}
     </>

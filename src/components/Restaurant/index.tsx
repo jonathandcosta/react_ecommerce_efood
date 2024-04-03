@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom'
-import { Card, TitleRating, TagWrapper, Titulo, ContainerAvaliacao, Avaliacao, Descricao, Button } from './styles'
 
 import Tag from '../Tag'
 import star from '../../assets/icons/star.png'
+
+import { Card, TitleRating, TagWrapper, Titulo, ContainerAvaliacao, Avaliacao, Descricao, Button } from './styles'
 
 type Props = {
   id: number,

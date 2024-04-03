@@ -1,10 +1,10 @@
-import styled from "styled-components";
-import { cores } from '../../styles'
+import styled from 'styled-components'
+import { colors } from '../../styles'
 
 export const Background = styled.div`
   width: 100%;
   height: 298px;
-  background-color: ${cores.secondary};
+  background-color: ${colors.secondary};
 `
 
 export const ImageContainer = styled.div`
@@ -18,7 +18,6 @@ export const ImagemLogo = styled.div`
   height: 57.5px;
   background-repeat: no-repeat;
   margin-top: 40px;
-
 `
 
 export const Midia = styled.div`

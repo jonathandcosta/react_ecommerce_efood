@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react"
-import { ContainerList } from "./styles"
 import { useParams } from "react-router-dom"
 
 import HeaderProfile from "../../components/HeaderProfile"
 import BannerDish from "../../components/BannerDish"
 import DishCard from "../../components/DishCard"
+
+import { ContainerList } from "./styles"
 
 export type dish =
   {

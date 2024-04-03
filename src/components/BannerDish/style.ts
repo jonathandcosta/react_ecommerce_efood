@@ -1,11 +1,11 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { colors } from '../../styles'
 
 export const Banner = styled.div`
   width: 100%;
   height: 280px;
   display: block;
-  color: ${cores.secondary};
+  color: ${colors.secondary};
   margin-bottom: 56px;
   position: relative;
   object-fit: cover;

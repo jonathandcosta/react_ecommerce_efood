@@ -1,11 +1,11 @@
 import styled from 'styled-components'
-import { breakpoints, cores } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 
 export const Card = styled.div`
-  background-color: ${cores.primary};
+  background-color: ${colors.primary};
   padding: 8px;
   width: 320px;
-  color: ${cores.secondary};
+  color: ${colors.secondary};
   margin-bottom: 32px;
   position: relative;
 
@@ -27,9 +27,9 @@ export const Card = styled.div`
 
   button {
     width: 100%;
-    background-color: ${cores.secondary};
+    background-color: ${colors.secondary};
     border: none;
-    color: ${cores.primary};
+    color: ${colors.primary};
     font-weight: bold;
     padding: 4px 0;
     cursor: pointer;
@@ -66,7 +66,7 @@ export const ModalContent = styled.div`
   position: relative;
   z-index: 1;
   color: #fff;
-  background-color: ${cores.primary};
+  background-color: ${colors.primary};
 
   header {
     display: flex;
@@ -110,11 +110,11 @@ export const ModalContent = styled.div`
     }
 
     button {
-      background-color: ${cores.secondary};
+      background-color: ${colors.secondary};
       padding: 4px 8px;
       font-size: 14px;
       border: none;
-      color: ${cores.primary};
+      color: ${colors.primary};
       font-weight: bold;
       cursor: pointer;
     }

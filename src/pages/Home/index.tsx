@@ -1,9 +1,10 @@
-import { Container } from "../../styles"
 
-import RestaurantList from "../../components/RestaurantList"
 import HeaderHome from "../../components/HeaderHome"
+import RestaurantList from "../../components/RestaurantList"
 
 import { useGetTopRestaurantesQuery } from '../../services/api'
+
+import { Container } from "../../styles"
 
 
 export type Restaurants = {

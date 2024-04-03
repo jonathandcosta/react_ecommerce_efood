@@ -1,9 +1,9 @@
-import { Background, ImageContainer, ImagemLogo, Midia, TextFooter } from './styles'
-
 import logo from '../../assets/icons/logo.png'
 import instagram from '../../assets/icons/instagram.svg'
 import facebook from '../../assets/icons/facebook.svg'
 import twitter from '../../assets/icons/twitter.svg'
+
+import { Background, ImageContainer, ImagemLogo, Midia, TextFooter } from './styles'
 
 const Footer = () => (
   <Background>

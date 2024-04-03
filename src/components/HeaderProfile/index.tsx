@@ -1,12 +1,13 @@
 import { Link } from 'react-router-dom'
-import { ImagemHero, ImagemLogo, Name } from './styles'
+import { useDispatch, useSelector } from 'react-redux'
+
+import { RootReducer } from '../../store'
+import { open } from '../../store/reducers/cart'
 
 import img from '../../assets/img/hero1.png'
 import logo from '../../assets/icons/logo.png'
 
-import { open } from '../../store/reducers/cart'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootReducer } from '../../store'
+import { ImagemHero, ImagemLogo, Name } from './styles'
 
 const HeaderProfile = () => {
   const dispatch = useDispatch()

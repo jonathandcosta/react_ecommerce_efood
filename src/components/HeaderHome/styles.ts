@@ -1,24 +1,23 @@
 import styled from 'styled-components'
-import { breakpoints, cores } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 
 export const Hero = styled.div`
   display: flex;
   justify-content: center;
 `
 
-export const ImagemHero = styled.div `
+export const ImagemHero = styled.div`
   width: 100%;
   height: 384px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${cores.primary};
+  color: ${colors.primary};
   position: relative;
 
   @media (max-width: ${breakpoints.tablet}) {
     height: 320px;
   }
-
 `
 
 export const ImagemLogo = styled.div`
@@ -31,7 +30,6 @@ export const ImagemLogo = styled.div`
   align-items: center;
   justify-content: center;
   background-repeat: no-repeat;
-  
 
   @media (max-width: ${breakpoints.tablet}) {
     padding: 64px 0 50px;
