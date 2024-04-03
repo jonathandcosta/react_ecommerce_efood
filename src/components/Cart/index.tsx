@@ -1,4 +1,4 @@
-import { CartContainer, CartItem, Check, ContainerDelivery, InputGroup, Overlay, Sidebar, Title, Value, NumberAdress, Error, Buttons, ButtonDelivery, ContainerPayment } from "./style"
+import { CartContainer, CartItem, Check, ContainerDelivery, InputGroup, Overlay, Sidebar, Title, Value, NumberAdress, Error, Buttons, ButtonDelivery, ContainerPayment, ConfirmationContainer, ConfirmationSidebar } from "./style"
 
 import trash from '../../assets/img/lixeira-de-reciclagem 1.png'
 import { useDispatch, useSelector } from "react-redux"
@@ -7,6 +7,9 @@ import { close, remove } from '../../store/reducers/cart'
 import { useFormik } from "formik"
 import * as Yup from 'yup'
 import { useState } from "react"
+
+import { usePurchaseMutation } from '../../services/api'
+import { Link } from "react-router-dom"
 
 
 export const formataPreco = (preco = 0) => {
@@ -24,6 +27,8 @@ const Cart = () => {
 
   const [openDelivery, setOpenDelivery] = useState(false)
   const [openPayment, setOpenPayment] = useState(false)
+
+  const [purchase, { isSuccess, data, isLoading }] = usePurchaseMutation()
 
   const closeCart = () => {
     dispatch(close())
@@ -43,6 +48,12 @@ const Cart = () => {
 
   const backCart = () => {
     setOpenDelivery(false)
+  }
+
+  const completePurchase = () => {
+    dispatch(close())
+    location.reload()
+
   }
 
   const getTotalPrice = () => {
@@ -110,7 +121,35 @@ const Cart = () => {
         .required('O campo é obrigatório')
     }),
     onSubmit: (values) => {
-      console.log(values)
+      purchase({
+        delivery: {
+          receiver: values.fullName,
+          address: {
+            description: values.adress,
+            city: values.city,
+            zipCode: values.cep,
+            number: Number(values.numberHome),
+            complement: values.completAdress
+          }
+        },
+        payment: {
+          card: {
+            name: values.fullName,
+            number: values.numberCard,
+            code: Number(values.cvv),
+            expires: {
+              mounth: Number(values.monthCard),
+              year: Number(values.yearCard)
+            }
+          }
+        },
+        products: [
+          {
+            id: 1,
+            price: 10
+          }
+        ]
+      })
     }
   })
 
@@ -160,164 +199,222 @@ const Cart = () => {
           </Sidebar>
         </CartContainer >
       </div>
-      ) : (
-      <form onSubmit={form.handleSubmit}>
-        <ContainerDelivery className={openDelivery ? 'is-open' : ''}>
-          <Overlay onClick={closeOverlay} />
-          <Sidebar>
-            <h2>Entrega</h2>
-            <InputGroup>
-              <label htmlFor="fullName">Quem irá receber</label>
-              <input
-                id="fullName"
-                type="text"
-                name='fullName'
-                value={form.values.fullName}
-                onChange={form.handleChange}
-                onBlur={form.handleBlur}
-              />
-              <Error>{getErrorMessage('fullName', form.errors.fullName)}</Error>
-            </InputGroup>
-            <InputGroup>
-              <label htmlFor="adress">Endereço</label>
-              <input
-                id="adress"
-                type="text"
-                name='adress'
-                value={form.values.adress}
-                onChange={form.handleChange}
-                onBlur={form.handleBlur}
-              />
-              <Error>{getErrorMessage('adress', form.errors.adress)}</Error>
-            </InputGroup>
-            <InputGroup>
-              <label htmlFor="city">Cidade</label>
-              <input
-                id="city"
-                type="text"
-                name='city'
-                value={form.values.city}
-                onChange={form.handleChange}
-                onBlur={form.handleBlur}
-              />
-              <Error>{getErrorMessage('city', form.errors.city)}</Error>
-            </InputGroup>
-            <NumberAdress>
-              <InputGroup maxWidth="155px">
-                <label htmlFor="cep">CEP</label>
-                <input
-                  id="cep"
-                  type="text"
-                  name='cep'
-                  value={form.values.cep}
-                  onChange={form.handleChange}
-                  onBlur={form.handleBlur}
-                />
-                <Error>{getErrorMessage('cep', form.errors.cep)}</Error>
-              </InputGroup>
-              <InputGroup maxWidth="155px">
-                <label htmlFor="numberHome">Número</label>
-                <input
-                  id="numberHome"
-                  type="text"
-                  name='numberHome'
-                  value={form.values.numberHome}
-                  onChange={form.handleChange}
-                  onBlur={form.handleBlur}
-                />
-                <Error>{getErrorMessage('numberHome', form.errors.numberHome)}</Error>
-              </InputGroup>
-            </NumberAdress>
-            <InputGroup>
-              <label htmlFor="completAdress">Complemento (opcional)</label>
-              <input
-                id="completAdress"
-                type="text"
-                name='completAdress'
-                value={form.values.completAdress}
-                onChange={form.handleChange}
-                onBlur={form.handleBlur}
-              />
-            </InputGroup>
-            <Buttons>
-              <ButtonDelivery onClick={() => setOpenPayment(!openPayment)} type='button' title='clique aqui para ir ao pagamento'>Continuar com o pagamento</ButtonDelivery>
-              <ButtonDelivery onClick={backCart} type='button' title='clique aqui para voltar ao carrinho'>Voltar para o carrinho</ButtonDelivery>
-            </Buttons>
-          </Sidebar>
-        </ContainerDelivery >
 
-        <ContainerPayment className={openPayment ? 'is-open' : ''}>
+      {/* INFORMAÇÕES APÓS O PAGAMENTO */}
+
+      {isSuccess && data ? (
+        <ConfirmationContainer>
           <Overlay onClick={closeOverlay} />
-          <Sidebar>
-            <h2>Pagamento - Valor a pagar R$ 190,90</h2>
-            <InputGroup>
-              <label htmlFor="cardOwner">Nome no cartão</label>
-              <input
-                type="text"
-                id='cardOwner'
-                name='cardOwner'
-                value={form.values.cardOwner}
-                onChange={form.handleChange}
-                onBlur={form.handleBlur}
-              />
-              <Error>{getErrorMessage('fullName', form.errors.cardOwner)}</Error>
-            </InputGroup>
-            <InputGroup>
-              <label htmlFor="numberCard">Número do cartão</label>
-              <input
-                type="text"
-                id='numberCard'
-                name='numberCard'
-                value={form.values.numberCard}
-                onChange={form.handleChange}
-                onBlur={form.handleBlur}
-              />
-              <Error>{getErrorMessage('numberCard', form.errors.numberCard)}</Error>
-            </InputGroup>
-            <InputGroup>
-              <label htmlFor="cvv">CVV</label>
-              <input
-                type="text"
-                id='cvv'
-                name='cvv'
-                value={form.values.cvv}
-                onChange={form.handleChange}
-                onBlur={form.handleBlur}
-              />
-              <Error>{getErrorMessage('cvv', form.errors.cvv)}</Error>
-            </InputGroup>
-            <InputGroup>
-              <label htmlFor="monthCard">Mês de vencimento</label>
-              <input
-                type="text"
-                id='monthCard'
-                name='monthCard'
-                value={form.values.monthCard}
-                onChange={form.handleChange}
-                onBlur={form.handleBlur}
-              />
-              <Error>{getErrorMessage('monthCard', form.errors.monthCard)}</Error>
-            </InputGroup>
-            <InputGroup>
-              <label htmlFor="yearCard">Ano de vencimento</label>
-              <input
-                type="text"
-                id='yearCard'
-                name='yearCard'
-                value={form.values.yearCard}
-                onChange={form.handleChange}
-                onBlur={form.handleBlur}
-              />
-              <Error>{getErrorMessage('yearCard', form.errors.yearCard)}</Error>
-            </InputGroup>
-            <Buttons>
-              <ButtonDelivery type='button' title='clique aqui para finalizar o pagamento'>Finalizar pagamento</ButtonDelivery>
-              <ButtonDelivery onClick={backDelivery} type='button' title='clique aqui para voltar editar o endereço'>Voltar para a edição de endereço</ButtonDelivery>
-            </Buttons>
-          </Sidebar>
-        </ContainerPayment>
-      </form>
-      )
+          <ConfirmationSidebar>
+            <h3>Pedido realizado - N°: {data?.orderId}</h3>
+            <p>
+              Estamos felizes em informar que seu pedido já está em processo de
+              preparação e, em breve, será entregue no endereço fornecido.
+            </p>
+
+            <p>
+              Gostaríamos de ressaltar que nossos entregadores não estão
+              autorizados a realizar cobranças extras.
+            </p>
+
+            <p>
+              Lembre-se da importância de higienizar as mãos após o recebimento
+              do pedido, garantindo assim sua segurança e bem-estar durante a
+              refeição.
+            </p>
+
+            <p>
+              Esperamos que desfrute de uma deliciosa e agradável experiência
+              gastronômica. Bom apetite!
+            </p>
+            <button>
+              <Link
+                to="/"
+                type="link"
+                title="Clique para voltar para home"
+                onClick={completePurchase}
+              ></Link>
+              Concluir
+            </button>
+          </ConfirmationSidebar>
+        </ConfirmationContainer>
+
+      ) : (
+
+        // INFORMAÇÕES PARA ENTREGA
+
+        <form onSubmit={form.handleSubmit}>
+          <ContainerDelivery className={openDelivery ? 'is-open' : ''}>
+            <Overlay onClick={closeOverlay} />
+            <Sidebar>
+              <h2>Entrega</h2>
+              <InputGroup>
+                <label htmlFor="fullName">Quem irá receber</label>
+                <input
+                  id="fullName"
+                  type="text"
+                  name='fullName'
+                  value={form.values.fullName}
+                  onChange={form.handleChange}
+                  onBlur={form.handleBlur}
+                />
+                <Error>{getErrorMessage('fullName', form.errors.fullName)}</Error>
+              </InputGroup>
+              <InputGroup>
+                <label htmlFor="adress">Endereço</label>
+                <input
+                  id="adress"
+                  type="text"
+                  name='adress'
+                  value={form.values.adress}
+                  onChange={form.handleChange}
+                  onBlur={form.handleBlur}
+                />
+                <Error>{getErrorMessage('adress', form.errors.adress)}</Error>
+              </InputGroup>
+              <InputGroup>
+                <label htmlFor="city">Cidade</label>
+                <input
+                  id="city"
+                  type="text"
+                  name='city'
+                  value={form.values.city}
+                  onChange={form.handleChange}
+                  onBlur={form.handleBlur}
+                />
+                <Error>{getErrorMessage('city', form.errors.city)}</Error>
+              </InputGroup>
+              <NumberAdress>
+                <InputGroup maxWidth="155px">
+                  <label htmlFor="cep">CEP</label>
+                  <input
+                    id="cep"
+                    type="text"
+                    name='cep'
+                    value={form.values.cep}
+                    onChange={form.handleChange}
+                    onBlur={form.handleBlur}
+                  />
+                  <Error>{getErrorMessage('cep', form.errors.cep)}</Error>
+                </InputGroup>
+                <InputGroup maxWidth="155px">
+                  <label htmlFor="numberHome">Número</label>
+                  <input
+                    id="numberHome"
+                    type="text"
+                    name='numberHome'
+                    value={form.values.numberHome}
+                    onChange={form.handleChange}
+                    onBlur={form.handleBlur}
+                  />
+                  <Error>{getErrorMessage('numberHome', form.errors.numberHome)}</Error>
+                </InputGroup>
+              </NumberAdress>
+              <InputGroup>
+                <label htmlFor="completAdress">Complemento (opcional)</label>
+                <input
+                  id="completAdress"
+                  type="text"
+                  name='completAdress'
+                  value={form.values.completAdress}
+                  onChange={form.handleChange}
+                  onBlur={form.handleBlur}
+                />
+              </InputGroup>
+              <Buttons>
+                <ButtonDelivery
+                  onClick={() => setOpenPayment(!openPayment)}
+                  type='button'
+                  title='clique aqui para ir ao pagamento'>Continuar com o pagamento</ButtonDelivery>
+                <ButtonDelivery
+                  onClick={backCart}
+                  type='button'
+                  title='clique aqui para voltar ao carrinho'>Voltar para o carrinho</ButtonDelivery>
+              </Buttons>
+            </Sidebar>
+          </ContainerDelivery >
+
+          {/* INFORMAÇÕES DE PAGAMENTO */}
+
+          <ContainerPayment className={openPayment ? 'is-open' : ''}>
+            <Overlay onClick={closeOverlay} />
+            <Sidebar>
+              <h2>Pagamento - Valor a pagar R$ 190,90</h2>
+              <InputGroup>
+                <label htmlFor="cardOwner">Nome no cartão</label>
+                <input
+                  type="text"
+                  id='cardOwner'
+                  name='cardOwner'
+                  value={form.values.cardOwner}
+                  onChange={form.handleChange}
+                  onBlur={form.handleBlur}
+                />
+                <Error>{getErrorMessage('fullName', form.errors.cardOwner)}</Error>
+              </InputGroup>
+              <InputGroup>
+                <label htmlFor="numberCard">Número do cartão</label>
+                <input
+                  type="text"
+                  id='numberCard'
+                  name='numberCard'
+                  value={form.values.numberCard}
+                  onChange={form.handleChange}
+                  onBlur={form.handleBlur}
+                />
+                <Error>{getErrorMessage('numberCard', form.errors.numberCard)}</Error>
+              </InputGroup>
+              <InputGroup>
+                <label htmlFor="cvv">CVV</label>
+                <input
+                  type="text"
+                  id='cvv'
+                  name='cvv'
+                  value={form.values.cvv}
+                  onChange={form.handleChange}
+                  onBlur={form.handleBlur}
+                />
+                <Error>{getErrorMessage('cvv', form.errors.cvv)}</Error>
+              </InputGroup>
+              <InputGroup>
+                <label htmlFor="monthCard">Mês de vencimento</label>
+                <input
+                  type="text"
+                  id='monthCard'
+                  name='monthCard'
+                  value={form.values.monthCard}
+                  onChange={form.handleChange}
+                  onBlur={form.handleBlur}
+                />
+                <Error>{getErrorMessage('monthCard', form.errors.monthCard)}</Error>
+              </InputGroup>
+              <InputGroup>
+                <label htmlFor="yearCard">Ano de vencimento</label>
+                <input
+                  type="text"
+                  id='yearCard'
+                  name='yearCard'
+                  value={form.values.yearCard}
+                  onChange={form.handleChange}
+                  onBlur={form.handleBlur}
+                />
+                <Error>{getErrorMessage('yearCard', form.errors.yearCard)}</Error>
+              </InputGroup>
+              <Buttons>
+                <ButtonDelivery
+                  type='submit'
+                  onClick={form.handleSubmit}
+                  title='clique aqui para finalizar a compra'
+                  disabled={isLoading}
+                >
+                  {isLoading ? 'Finalizando pagamento...' : 'Finalizar pagamento'}
+                </ButtonDelivery>
+                <ButtonDelivery onClick={backDelivery} type='button' title='clique aqui para voltar editar o endereço'>Voltar para a edição de endereço</ButtonDelivery>
+              </Buttons>
+            </Sidebar>
+          </ContainerPayment>
+        </form>
+      )}
     </>
   )
 }

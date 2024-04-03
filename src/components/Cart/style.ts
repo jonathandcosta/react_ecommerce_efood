@@ -153,7 +153,52 @@ export const ContainerPayment = styled.div`
     margin-bottom: 16px;
   }
 `
+export const ConfirmationContainer = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  z-index: 1;
 
+  h3 {
+    color: ${cores.secondary};
+    font-size: 16px;
+    line-height: 18px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+`
+
+export const ConfirmationSidebar = styled.aside`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: ${cores.primary};
+  color: ${cores.secondary};
+  z-index: 1;
+  padding: 32px 8px 0 8px;
+  max-width: 344px;
+  width: 100%;
+
+  p {
+    font-size: 14px;
+  }
+
+  button {
+    max-width: 100%;
+    width: 100%;
+    height: 24px;
+    background-color: ${cores.secondary};
+    border: none;
+    color: ${cores.primary};
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: 700;
+  }
+`
 export const InputGroup = styled.div<InputGroupProps>`
   max-width: ${(props) => props.maxWidth || 'auto'};
   label {
