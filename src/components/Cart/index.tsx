@@ -334,7 +334,7 @@ const Cart = () => {
           <S.ContainerPayment className={openPayment ? 'is-open' : ''}>
             <S.Overlay onClick={closeOverlay} />
             <S.Sidebar>
-              <h2>Pagamento - Valor a pagar R$ 190,90</h2>
+              <h2>Pagamento - Valor a pagar {parseToBrl(getTotalPrice())}</h2>
               <S.InputGroup>
                 <label htmlFor="cardOwner">Nome no cartão</label>
                 <input
