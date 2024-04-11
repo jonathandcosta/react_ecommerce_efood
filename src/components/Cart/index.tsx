@@ -1,6 +1,6 @@
 import { useFormik } from "formik"
 import * as Yup from 'yup'
-import { useState } from "react"
+import { MouseEventHandler, useState } from "react"
 
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
@@ -147,6 +147,10 @@ const Cart = () => {
       })
     }
   })
+
+  const handleClick: MouseEventHandler<HTMLButtonElement> = () => {
+    //  evento de clique para envio do formulário
+  };
 
 
   const getErrorMessage = (fieldName: string, message?: string) => {
@@ -398,7 +402,7 @@ const Cart = () => {
               <S.Buttons>
                 <S.ButtonDelivery
                   type='submit'
-                  onClick={form.handleSubmit}
+                  onClick={handleClick}
                   title='clique aqui para finalizar a compra'
                   disabled={isLoading}
                 >
