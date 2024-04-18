@@ -1,9 +1,9 @@
 import { useFormik } from "formik"
 import * as Yup from 'yup'
-import { MouseEventHandler, useState } from "react"
+import { useState } from "react"
 
 import { useDispatch, useSelector } from "react-redux"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 import { RootReducer } from "../../store"
 import { close, remove } from '../../store/reducers/cart'
@@ -45,10 +45,12 @@ const Cart = () => {
     setOpenDelivery(false)
   }
 
+  const navigate = useNavigate()
+
   const completePurchase = () => {
+    navigate('/')
     dispatch(close())
     location.reload()
-
   }
 
   const getTotalPrice = () => {
@@ -148,10 +150,6 @@ const Cart = () => {
     }
   })
 
-  const handleClick: MouseEventHandler<HTMLButtonElement> = () => {
-    //  evento de clique para envio do formulário
-  };
-
 
   const getErrorMessage = (fieldName: string, message?: string) => {
     const isTouched = fieldName in form.touched
@@ -240,9 +238,12 @@ const Cart = () => {
 
       ) : (
 
-        // INFORMAÇÕES PARA ENTREGA
+        // FORMULÁRIO PARA  DADOS DE ENTREGA E PAGAMENTO
 
         <form onSubmit={form.handleSubmit}>
+
+          {/* DADOS PARA ENTREGA */}
+
           <S.ContainerDelivery className={openDelivery ? 'is-open' : ''}>
             <S.Overlay onClick={closeOverlay} />
             <S.Sidebar>
@@ -402,7 +403,7 @@ const Cart = () => {
               <S.Buttons>
                 <S.ButtonDelivery
                   type='submit'
-                  onClick={handleClick}
+                  onClick={form.handleSubmit}
                   title='clique aqui para finalizar a compra'
                   disabled={isLoading}
                 >
