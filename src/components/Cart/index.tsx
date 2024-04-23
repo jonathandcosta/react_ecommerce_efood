@@ -25,7 +25,6 @@ const Cart = () => {
 
   const [purchase, { isSuccess, data, isLoading }] = usePurchaseMutation()
 
-
   const closeCart = () => {
     dispatch(close())
     setOpenDelivery(false)
@@ -38,7 +37,6 @@ const Cart = () => {
   }
 
   const handleOpenPayment = () => {
-
     setOpenDelivery(false)
     setOpenPayment(true)
   }
@@ -77,17 +75,17 @@ const Cart = () => {
 
   const form = useFormik({
     initialValues: {
-      fullName: 'Jonathan',
-      adress: 'rua presidente do teste',
-      city: 'confia',
-      cep: '59035540',
-      numberHome: '2541',
+      fullName: '',
+      adress: '',
+      city: '',
+      cep: '',
+      numberHome: '',
       completAdress: '',
-      cardOwner: '1254879632548741',
-      numberCard: '123',
-      cvv: '123',
-      monthCard: '12',
-      yearCard: '1235',
+      cardOwner: '',
+      numberCard: '',
+      cvv: '',
+      monthCard: '',
+      yearCard: '',
     },
     validationSchema: Yup.object({
       fullName: Yup.string()
@@ -103,7 +101,7 @@ const Cart = () => {
         .min(8, 'O nome precisa ter pelo menos 5 caracteres')
         .required('O campo é obrigatório'),
       numberHome: Yup.string()
-        .min(4, 'O nome precisa ter pelo menos 5 caracteres')
+        .min(2, 'O nome precisa ter pelo menos 5 caracteres')
         .max(5, 'O nome precisa ter pelo menos 5 caracteres')
         .required('O campo é obrigatório'),
       completAdress: Yup.string()
@@ -122,11 +120,11 @@ const Cart = () => {
         .required('O campo é obrigatório'),
       monthCard: Yup.string()
         .min(2, 'Precisa ter  caracteres')
-        .max(4, 'Precisa ter  caracteres')
+        .max(2, 'Precisa ter  caracteres')
         .required('O campo é obrigatório'),
       yearCard: Yup.string()
         .min(2, 'Precisa ter 4 caracteres')
-        .min(4, 'Precisa ter 4 caracteres')
+        .min(2, 'Precisa ter 4 caracteres')
         .required('O campo é obrigatório')
     }),
     onSubmit: (values) => {
@@ -156,7 +154,6 @@ const Cart = () => {
       })
     }
   })
-
 
   const getErrorMessage = (fieldName: string, message?: string) => {
     const isTouched = fieldName in form.touched
@@ -216,18 +213,15 @@ const Cart = () => {
               Estamos felizes em informar que seu pedido já está em processo de
               preparação e, em breve, será entregue no endereço fornecido.
             </p>
-
             <p>
               Gostaríamos de ressaltar que nossos entregadores não estão
               autorizados a realizar cobranças extras.
             </p>
-
             <p>
               Lembre-se da importância de higienizar as mãos após o recebimento
               do pedido, garantindo assim sua segurança e bem-estar durante a
               refeição.
             </p>
-
             <p>
               Esperamos que desfrute de uma deliciosa e agradável experiência
               gastronômica. Bom apetite!
