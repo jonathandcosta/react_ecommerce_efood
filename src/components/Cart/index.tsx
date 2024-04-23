@@ -3,7 +3,7 @@ import * as Yup from 'yup'
 import { useState } from "react"
 
 import { useDispatch, useSelector } from "react-redux"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 import { RootReducer } from "../../store"
 import { close, remove } from '../../store/reducers/cart'
@@ -25,6 +25,7 @@ const Cart = () => {
 
   const [purchase, { isSuccess, data, isLoading }] = usePurchaseMutation()
 
+
   const closeCart = () => {
     dispatch(close())
     setOpenDelivery(false)
@@ -34,6 +35,17 @@ const Cart = () => {
     dispatch(close())
     setOpenDelivery(false)
     setOpenPayment(false)
+  }
+
+  const handleOpenPayment = () => {
+
+    setOpenDelivery(false)
+    setOpenPayment(true)
+  }
+
+  const handleOpenDelivery = () => {
+    dispatch(close())
+    setOpenDelivery(true)
   }
 
   const backDelivery = () => {
@@ -65,17 +77,17 @@ const Cart = () => {
 
   const form = useFormik({
     initialValues: {
-      fullName: '',
-      adress: '',
-      city: '',
-      cep: '',
-      numberHome: '',
+      fullName: 'Jonathan',
+      adress: 'rua presidente do teste',
+      city: 'confia',
+      cep: '59035540',
+      numberHome: '2541',
       completAdress: '',
-      cardOwner: '',
-      numberCard: '',
-      cvv: '',
-      monthCard: '',
-      yearCard: '',
+      cardOwner: '1254879632548741',
+      numberCard: '123',
+      cvv: '123',
+      monthCard: '12',
+      yearCard: '1235',
     },
     validationSchema: Yup.object({
       fullName: Yup.string()
@@ -140,12 +152,7 @@ const Cart = () => {
             }
           }
         },
-        products: [
-          {
-            id: 1,
-            price: 10
-          }
-        ]
+        products: items
       })
     }
   })
@@ -183,7 +190,8 @@ const Cart = () => {
                   <p>Valor Total</p>
                   <p>{parseToBrl(getTotalPrice())} {''}</p>
                 </S.Check>
-                <button onClick={() => setOpenDelivery(!openDelivery)} type="button">Continuar com a entrega</button>
+                <button onClick={handleOpenDelivery}
+                  type="button">Continuar com a entrega</button>
               </>
             ) : (
               <>
@@ -224,15 +232,7 @@ const Cart = () => {
               Esperamos que desfrute de uma deliciosa e agradável experiência
               gastronômica. Bom apetite!
             </p>
-            <button>
-              <Link
-                to="/"
-                type="link"
-                title="Clique para voltar para home"
-                onClick={completePurchase}
-              ></Link>
-              Concluir
-            </button>
+            <button onClick={completePurchase}> Concluir </button>
           </S.ConfirmationSidebar>
         </S.ConfirmationContainer>
 
@@ -323,7 +323,7 @@ const Cart = () => {
               </S.InputGroup>
               <S.Buttons>
                 <S.ButtonDelivery
-                  onClick={() => setOpenPayment(!openPayment)}
+                  onClick={handleOpenPayment}
                   type='button'
                   title='clique aqui para ir ao pagamento'>Continuar com o pagamento</S.ButtonDelivery>
                 <S.ButtonDelivery
@@ -403,7 +403,6 @@ const Cart = () => {
               <S.Buttons>
                 <S.ButtonDelivery
                   type='submit'
-                  onClick={form.handleSubmit}
                   title='clique aqui para finalizar a compra'
                   disabled={isLoading}
                 >

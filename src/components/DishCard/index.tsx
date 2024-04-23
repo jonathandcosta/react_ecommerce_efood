@@ -23,6 +23,7 @@ const DishCard = ({ cardapio }: Cardapio) => {
 
   const addToCart = (index: number) => {
     dispatch(add(cardapio[index]))
+    setModalEstaAberto(false)
     dispatch(open())
   }
 
