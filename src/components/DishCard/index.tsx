@@ -27,6 +27,13 @@ const DishCard = ({ cardapio }: Cardapio) => {
     dispatch(open())
   }
 
+  const getDescription = (descricao: string) => {
+    if (descricao.length > 95) {
+      return descricao.slice(0, 250) + '...'
+    }
+    return descricao
+  }
+
   return (
     <>
       {cardapio &&
@@ -34,7 +41,7 @@ const DishCard = ({ cardapio }: Cardapio) => {
           <Card>
             <img src={item.foto} alt="Pizza" />
             <h1>{item.nome}</h1>
-            <p>{item.descricao}</p>
+            <p>{getDescription(item.descricao)}</p>
             <button onClick={() => handleClick(index)}>Adicionar ao Carrinho</button>
           </Card>
         )

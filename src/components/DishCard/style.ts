@@ -2,21 +2,37 @@ import styled from 'styled-components'
 import { breakpoints, colors } from '../../styles'
 
 export const Card = styled.div`
-  background-color: ${colors.primary};
+  background-color: #e66767;
   padding: 8px;
-  width: 320px;
-  color: ${colors.secondary};
+  width: 100%;
+  height: 420px;
+  color: #ffebd9;
   margin-bottom: 32px;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   > img {
     width: 100%;
     height: 167px;
     object-fit: cover;
+    display: block;
+  }
+
+  h1 {
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: 900;
+    line-height: 18.75px;
   }
 
   h3 {
-    margin: 8px 0;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+    text-align: left;
   }
 
   p {
