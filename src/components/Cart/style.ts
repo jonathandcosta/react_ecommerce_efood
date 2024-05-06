@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { colors } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 
 export const Overlay = styled.div`
   position: absolute;
@@ -30,6 +30,10 @@ export const Sidebar = styled.aside`
   color: ${colors.title};
   z-index: 1;
   padding: 16px 8px 0px 8px;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    max-width: 85%;
+  }
 
   ul {
     list-style: none;
@@ -77,6 +81,10 @@ export const CartItem = styled.li`
       position: absolute;
       top: 76px;
       right: 16px;
+
+      @media (max-width: ${breakpoints.tablet}) {
+        margin-right: 25px;
+      }
     }
   }
 `
@@ -87,6 +95,10 @@ export const Title = styled.p`
   line-height: 21px;
   margin-top: 8px;
   color: ${colors.primary};
+
+  @media (max-width: ${breakpoints.tablet}) {
+    font-size: 15px;
+  }
 `
 export const Value = styled.p`
   font-size: 14px;
@@ -94,6 +106,10 @@ export const Value = styled.p`
   line-height: 22px;
   margin-top: 16px;
   color: ${colors.primary};
+
+  @media (max-width: ${breakpoints.tablet}) {
+    font-size: 12px;
+  }
 `
 
 export const Check = styled.div`

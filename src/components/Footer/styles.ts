@@ -1,10 +1,11 @@
 import styled from 'styled-components'
-import { colors } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 
 export const Background = styled.div`
   width: 100%;
   height: 298px;
   background-color: ${colors.secondary};
+  margin-top: 50px;
 `
 
 export const ImageContainer = styled.div`
@@ -32,4 +33,8 @@ export const TextFooter = styled.p`
   font-weight: 400;
   line-height: 14px;
   text-align: center;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    width: 90%;
+  }
 `

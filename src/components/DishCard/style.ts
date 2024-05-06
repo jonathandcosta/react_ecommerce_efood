@@ -103,6 +103,10 @@ export const ModalContent = styled.div`
       width: 280px;
       object-fit: cover;
       margin-right: 24px;
+
+      @media (max-width: ${breakpoints.desktop}) {
+        width: 100%;
+      }
     }
 
     h3 {

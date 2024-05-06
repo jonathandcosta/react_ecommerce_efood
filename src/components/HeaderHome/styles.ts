@@ -14,10 +14,6 @@ export const ImagemHero = styled.div`
   justify-content: center;
   color: ${colors.primary};
   position: relative;
-
-  @media (max-width: ${breakpoints.tablet}) {
-    height: 320px;
-  }
 `
 
 export const ImagemLogo = styled.div`
