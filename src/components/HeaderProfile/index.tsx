@@ -22,9 +22,7 @@ const HeaderProfile = () => {
     (
       <>
         <ImagemHero style={{ backgroundImage: `url(${img})` }}>
-          <Link to="/">
-            <Name>Restaurantes</Name>
-          </Link>
+          <Link to="/"><Name>Restaurantes</Name></Link>
           <ImagemLogo style={{ backgroundImage: `url(${logo})` }}></ImagemLogo>
           <Link to={"#"} onClick={openCart}><Name>{items.length} Produto no Carrinho</Name></Link>
         </ImagemHero>
